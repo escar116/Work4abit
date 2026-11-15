@@ -1,0 +1,2446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>WORK 4 A BIT</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/png" href="/favicon.png" />
+</head>
+
+<body>
+
+    <!-- ==========================================================================
+         0. AMBIENT BACKGROUND (CIRCUIT TRACELINES, HEXAGONS & BLUEPRINT GRID)
+         ========================================================================== -->
+    <div class="ambient-background" aria-hidden="true">
+        <!-- Blueprint Grid Pattern -->
+        <div class="blueprint-grid"></div>
+
+        <!-- Top Right PCB Circuit Traces -->
+        <svg class="decor-pcb decor-pcb-top" viewBox="0 0 400 300" fill="none" stroke="currentColor">
+            <path d="M 50,0 L 50,60 L 120,130 L 220,130 L 250,160 L 250,220" stroke-width="1.5" stroke-dasharray="4 4"
+                opacity="0.6" />
+            <path d="M 100,0 L 100,40 L 160,100 L 300,100 L 340,140 L 340,280" stroke-width="1.5" opacity="0.8" />
+            <path d="M 200,0 L 200,30 L 240,70 L 380,70" stroke-width="1.5" opacity="0.5" />
+            <circle cx="50" cy="60" r="3.5" fill="currentColor" />
+            <circle cx="120" cy="130" r="3.5" fill="currentColor" />
+            <circle cx="250" cy="220" r="4.5" fill="currentColor" />
+            <circle cx="160" cy="100" r="3.5" fill="currentColor" />
+            <circle cx="340" cy="280" r="4.5" fill="currentColor" />
+        </svg>
+
+        <!-- Left Ambient Hexagon Clusters -->
+        <svg class="decor-hex decor-hex-1" viewBox="0 0 160 160" fill="none" stroke="currentColor">
+            <polygon points="60,20 100,20 120,55 100,90 60,90 40,55" stroke-width="1.5" opacity="0.7" />
+            <polygon points="100,75 140,75 160,110 140,145 100,145 80,110" stroke-width="1.5" stroke-dasharray="3 3"
+                opacity="0.5" />
+            <circle cx="60" cy="20" r="3" fill="currentColor" />
+            <circle cx="120" cy="55" r="3" fill="currentColor" />
+            <circle cx="100" cy="90" r="3" fill="currentColor" />
+        </svg>
+
+        <!-- Right Side Vertical Tracelines -->
+        <svg class="decor-side-traces" viewBox="0 0 60 800" fill="none" stroke="currentColor">
+            <path d="M 30,0 L 30,800" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4" />
+            <path d="M 15,100 L 15,250 L 45,280 L 45,500 L 15,530 L 15,700" stroke-width="1.5" opacity="0.6" />
+            <circle cx="15" cy="250" r="3" fill="currentColor" />
+            <circle cx="45" cy="280" r="3" fill="currentColor" />
+            <circle cx="45" cy="500" r="3" fill="currentColor" />
+            <circle cx="15" cy="530" r="3" fill="currentColor" />
+        </svg>
+    </div>
+
+    <!-- ==========================================================================
+         1. LOADING OVERLAY
+         ========================================================================== -->
+    <div id="loading-screen" class="loading-overlay">
+        <!-- Skeleton Sidebar -->
+        <aside class="skeleton-sidebar">
+            <div class="skeleton-brand"></div>
+            <div class="skeleton-nav-item"></div>
+            <div class="skeleton-nav-item"></div>
+            <div class="skeleton-nav-item"></div>
+            <div class="skeleton-nav-item"></div>
+        </aside>
+        <!-- Skeleton Main Content -->
+        <main class="skeleton-main">
+            <div class="skeleton-header-line"></div>
+            <div class="skeleton-cards-grid">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+            <div class="skeleton-large-block"></div>
+        </main>
+    </div>
+
+    <!-- Dedicated Logout Loading Screen -->
+    <div id="logout-screen" class="logout-overlay hidden" aria-live="assertive" role="alert">
+        <div class="logout-card">
+            <div class="logout-spinner"></div>
+            <h3 class="logout-title">Signing out...</h3>
+            <p class="logout-subtitle">Closing your session securely</p>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         2. AUTH & PUBLIC VIEWS (LANDING, LOGIN, REGISTER, FORGOT, PENDING)
+         ========================================================================== -->
+    <div id="auth-views" class="auth-container hidden">
+
+        <!-- 2.0 Modern Clean Landing Page -->
+        <section id="section-landing" class="landing-page-container">
+<div class="landing-auth-card">
+                        <form id="landing-quick-login-form">
+                            <div class="form-group">
+                                <label class="form-label" for="landing-login-email">Email Address</label>
+                                <input type="email" id="landing-login-email" class="form-control landing-input"
+                                    placeholder="student@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="landing-login-password">Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="landing-login-password" class="form-control landing-input"
+                                        placeholder="••••••••" required>
+                                    <button type="button" class="password-toggle-btn" aria-label="Show password" tabindex="-1">
+                                        <svg class="eye-icon eye-show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                                            <circle cx="12" cy="12" r="3"/>
+                                        </svg>
+                                        <svg class="eye-icon eye-hide hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                                            <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                                            <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                                            <line x1="2" x2="22" y1="2" y2="22"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <p id="landing-login-error" class="error-message hidden"></p>
+                            <div class="landing-form-actions">
+                                <button type="submit" id="landing-login-btn"
+                                    class="btn btn-purple btn-landing-action">Sign In</button>
+                                <button type="button" id="landing-register-btn"
+                                    class="btn btn-outline btn-landing-action">Sign Up</button>
+                            </div>
+                        </form>
+
+                        <div class="landing-card-footer">
+                            <a href="#" id="landing-forgot-link" class="link-text text-sm">Forgot password?</a>
+                            <div class="divider"><span>OR</span></div>
+                            <button type="button" id="landing-google-btn" class="btn btn-outline btn-block">
+                                <img src="/images/google.png" alt="Google" class="google-icon" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; margin-right: 8px; display: inline-block;">
+                                Sign in to Google
+                            </button>
+                            <p class="mt-3 text-muted text-sm text-center">Don't have an account? <a href="#" id="landing-link-register" class="link-text font-bold">Sign Up</a></p>
+                        </div>
+                    </div>
+        </section>
+
+        <!-- 2.2 Register Form -->
+        <section id="section-register" class="auth-card register hidden">
+            <div class="auth-header">
+                <a href="#" id="register-link-home" class="link-text text-sm mb-2 block">← Back to Home</a>
+                <h1 class="auth-title">Create an Account</h1>
+                <p class="auth-subtitle">Join Work 4 A Bit today!</p>
+            </div>
+
+            <div id="register-google-status" class="google-status-box hidden">
+                <span>✓ Google Account Linked: <strong id="register-google-email"></strong></span>
+            </div>
+
+            <button type="button" id="register-google-btn" class="btn btn-outline btn-block mb-4">
+                <img src="/images/google.png" alt="Google" class="google-icon" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; margin-right: 8px; display: inline-block;">
+                Sign in to Google
+            </button>
+
+            <div id="register-divider" class="divider"><span>OR FILL DETAILS</span></div>
+
+            <form id="register-form">
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label class="form-label" for="register-fullname">Full Name *</label>
+                        <input type="text" id="register-fullname" class="form-control" placeholder="Juan Dela Cruz"
+                            required>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label class="form-label" for="register-studentid">Student ID *</label>
+                        <input type="text" id="register-studentid" class="form-control" placeholder="24-00000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label class="form-label" for="register-gender">Gender</label>
+                        <select id="register-gender" class="form-control">
+                            <option value="" disabled selected>Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label class="form-label" for="register-role">Preferred Role</label>
+                        <select id="register-role" class="form-control">
+                            <option value="Offer My Skills">Student / Freelancer</option>
+                            <option value="Need Technical Assistance">Employer / Client</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="register-faculty">Faculty Reference</label>
+                    <select id="register-faculty" class="form-control">
+                        <option value="Engr. John Michael B. Casibang">Engr. John Michael B. Casibang</option>
+                        <option value="Dr. Bernard D. Bisuecos">Dr. Bernard D. Bisuecos</option>
+                        <option value="Engr. Gilbert T. Calubaquib">Engr. Gilbert T. Calubaquib</option>
+                        <option value="Engr. Rose Jean B. Oñate">Engr. Rose Jean B. Oñate</option>
+                        <option value="Engr. Melody S. Paned">Engr. Melody S. Paned</option>
+                        <option value="Engr. Maria Niña Dioceth P. Sales">Engr. Maria Niña Dioceth P. Sales</option>
+                        <option value="Engr. Mervin G. Molina">Engr. Mervin G. Molina</option>
+                        <option value="Prof. John Wendell R. Paned">Prof. John Wendell R. Paned</option>
+                        <option value="Prof. Narcisa C. Laggui">Prof. Narcisa C. Laggui</option>
+                        <option value="Engr. Mark Bernard M. Bariuan">Engr. Mark Bernard M. Bariuan</option>
+                        <option value="Engr. Karl Stephen O. Evallo">Engr. Karl Stephen O. Evallo</option>
+                        <option value="Engr. Geraldo D. Quimado Jr.">Engr. Geraldo D. Quimado Jr.</option>
+                        <option value="Engr. Ralph Maron Eda">Engr. Ralph Maron Eda</option>
+                        <option value="Engr. Sapalo B. Louise">Engr. Sapalo B. Louise</option>
+                        <option value="Others">Others (Please specify)</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="register-faculty-other-group">
+                    <label class="form-label" for="register-faculty-other">Specify Faculty Reference *</label>
+                    <input type="text" id="register-faculty-other" class="form-control" placeholder="Type faculty name">
+                </div>
+
+                <div class="form-group" id="register-email-group">
+                    <label class="form-label" for="register-email">Email Address *</label>
+                    <input type="email" id="register-email" class="form-control" placeholder="student@email.com">
+                </div>
+
+                <div class="form-row" id="register-password-row">
+                    <div class="form-group flex-1" id="register-password-group">
+                        <label class="form-label" for="register-password">Password *</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="register-password" class="form-control" placeholder="••••••••">
+                            <button type="button" class="password-toggle-btn" aria-label="Show password" tabindex="-1">
+                                <svg class="eye-icon eye-show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <svg class="eye-icon eye-hide hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                                    <line x1="2" x2="22" y1="2" y2="22"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group flex-1" id="register-confirm-group">
+                        <label class="form-label" for="register-confirm-password">Confirm Password *</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="register-confirm-password" class="form-control"
+                                placeholder="••••••••">
+                            <button type="button" class="password-toggle-btn" aria-label="Show password" tabindex="-1">
+                                <svg class="eye-icon eye-show" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <svg class="eye-icon eye-hide hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                                    <line x1="2" x2="22" y1="2" y2="22"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="register-certificate">Upload Certificate of Enrollment or Assessment Form *</label>
+                    <div id="register-cert-dropzone" class="file-dropzone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="mt-1 text-muted">Click or drag & drop JPG, PNG or PDF</p>
+                        <input type="file" id="register-certificate" accept="image/*"
+                            style="opacity:0; position:absolute; z-index:-1;">
+                    </div>
+                    <img id="register-cert-preview" class="file-preview hidden" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Certificate Preview">
+                </div>
+
+                <p id="register-error" class="error-message hidden"></p>
+                <button type="submit" id="register-submit-btn" class="btn btn-purple btn-block mt-4">Create
+                    Account</button>
+            </form>
+        </section>
+
+        <!-- 2.3 Forgot Password -->
+        <section id="section-forgot-password" class="auth-card hidden">
+            <div class="auth-header">
+                <h1 class="auth-title">Reset Password</h1>
+                <p class="auth-subtitle">Enter your email to receive a password reset link</p>
+            </div>
+            <form id="forgot-form">
+                <div class="form-group">
+                    <label class="form-label" for="forgot-email">Email Address</label>
+                    <input type="email" id="forgot-email" class="form-control" placeholder="student@email.com"
+                        required>
+                </div>
+                <div id="forgot-status-msg" class="hidden"></div>
+                <button type="submit" id="forgot-submit-btn" class="btn btn-purple btn-block">Send Reset Link</button>
+            </form>
+            <div class="auth-links mt-4 text-center">
+                <a href="#" id="forgot-link-login" class="link-text">← Back to Login</a>
+            </div>
+        </section>
+
+        <!-- 2.4 Pending Verification -->
+        <section id="section-pending" class="auth-card text-center hidden">
+            <div class="pending-badge">⏳</div>
+            <h1 class="auth-title">Verification Status</h1>
+            <div class="verification-status-pill mt-3">PENDING</div>
+            <p class="text-muted mt-3">Your documents are currently being reviewed by an administrator. You will gain
+                access once verified.</p>
+            <button type="button" id="pending-logout-btn" class="btn btn-outline mt-6">Log Out</button>
+        </section>
+
+    </div>
+
+    <!-- ==========================================================================
+         3. MAIN APP LAYOUT (SIDEBAR + CENTERED CONTENT SECTIONS)
+         ========================================================================== -->
+    <div id="app-views" class="layout hidden">
+
+        <!-- Mobile Sidebar Overlay -->
+        <div id="sidebar-overlay" class="mobile-overlay hidden"></div>
+
+        <!-- 3.1 SOLID DEEP NAVY SIDEBAR NAVIGATION -->
+        <aside id="sidebar" class="sidebar-nav">
+            <!-- Sidebar Header & Logo -->
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-text">WORK <span class="logo-badge">4</span> A BIT</span>
+                </div>
+                <div class="header-bell-wrapper">
+                    <button type="button" class="btn-notification-bell" id="btn-notifications" title="Notifications" aria-label="Notifications">
+                        <svg class="bell-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <span class="notification-badge" id="notification-unread-count">0</span>
+                    </button>
+                    <!-- Notification Tray Dropdown -->
+                    <div class="notification-dropdown hidden" id="notification-dropdown">
+                        <div class="notification-dropdown-header">
+                            <span class="font-bold text-sm">Notifications</span>
+                            <button type="button" class="btn-mark-all-read" id="btn-mark-read">Mark all as read</button>
+                        </div>
+                        <div class="notification-list" id="notification-list">
+                            <div class="notification-empty text-muted">No new notifications</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="sidebar-close-btn" class="mobile-close-btn">✕</button>
+            </div>
+
+            <!-- Primary Navigation Links (Categorized Sidebar Design) -->
+            <nav class="nav-links">
+                <!-- Group 1: Overview / Workspace -->
+                <div class="nav-group">
+                    <span class="nav-group-label">Overview</span>
+                    <button type="button" class="nav-btn active" data-target="dashboard" title="Dashboard">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                        </svg>
+                        <span class="nav-btn-label">Dashboard</span>
+                    </button>
+                </div>
+
+                <!-- Group 2: Services & Mentoring (Dedicated Section Separation) -->
+                <div class="nav-group nav-group-marketplace">
+                    <span class="nav-group-label">Services & Mentoring</span>
+                    <button type="button" class="nav-btn" data-target="service-offers" title="Service Offers">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        <span class="nav-btn-label">Service Offers</span>
+                    </button>
+                    <button type="button" class="nav-btn" data-target="service-requests" title="Service Requests">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <path d="M14 2v6h6"></path>
+                            <path d="M16 13H8"></path>
+                            <path d="M16 17H8"></path>
+                            <path d="M10 9H8"></path>
+                        </svg>
+                        <span class="nav-btn-label">Service Requests</span>
+                    </button>
+                    <button type="button" class="nav-btn" data-target="mentoring" title="Mentoring">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <span class="nav-btn-label">Mentoring</span>
+                    </button>
+                </div>
+
+                <!-- Group 3: Collaboration & Activity -->
+                <div class="nav-group">
+                    <span class="nav-group-label">Collaboration</span>
+                    <button type="button" class="nav-btn" data-target="applications" title="Applications">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <span class="nav-btn-label">Applications</span>
+                        <span class="nav-badge hidden" id="nav-badge-applications">0</span>
+                    </button>
+                    <button type="button" class="nav-btn" data-target="messages" title="Messages">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span class="nav-btn-label">Messages</span>
+                        <span class="nav-badge hidden" id="nav-badge-messages">0</span>
+                    </button>
+                    <button type="button" class="nav-btn" data-target="transactions" title="Records">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span class="nav-btn-label">Records</span>
+                    </button>
+                    <button type="button" class="nav-btn" data-target="logs" title="Activity Logs">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 8v4l3 3"></path>
+                        </svg>
+                        <span class="nav-btn-label">Logs</span>
+                    </button>
+                </div>
+
+                <!-- Group 4: Account & Management -->
+                <div class="nav-group">
+                    <span class="nav-group-label">Account</span>
+                    <button type="button" class="nav-btn" data-target="profile" title="Profile">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span class="nav-btn-label">Profile</span>
+                    </button>
+                    <button type="button" class="nav-btn hidden" id="nav-admin" data-target="admin" title="Admin">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <span class="nav-btn-label">Admin</span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Bottom Profile & Logout Footer (Clean Name + Highlight Leave Button, 'Pro' Removed) -->
+            <div class="sidebar-user-footer">
+                <div class="user-footer-profile" data-target="profile" title="View Profile">
+                    <div class="avatar avatar-sm avatar-photo" id="sidebar-user-avatar">CP</div>
+                    <div class="user-footer-details">
+                        <span class="user-footer-name" id="sidebar-user-name">charles jan paraggua</span>
+                    </div>
+                </div>
+                <!-- Highlight Leave/Logout Icon Button -->
+                <button type="button" class="sidebar-leave-btn" id="btn-logout" title="Log Out" aria-label="Log Out">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- 3.2 MAIN CONTENT WRAPPER (CENTERED) -->
+        <main class="main-content">
+            <div class="content-container">
+
+                <!-- Mobile Top Header Bar -->
+                <div class="mobile-top-bar">
+                    <button type="button" id="mobile-menu-btn" class="btn btn-ghost btn-sm" aria-label="Toggle navigation menu">☰</button>
+                    <div class="brand-title">WORK 4 A BIT</div>
+                    <div class="header-bell-wrapper mobile-bell-wrapper">
+                        <button type="button" class="btn-notification-bell mobile-bell-btn" id="btn-mobile-notifications" title="Notifications" aria-label="Notifications">
+                            <svg class="bell-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="notification-badge" id="mobile-notification-unread-count">0</span>
+                        </button>
+                        <div class="notification-dropdown hidden" id="mobile-notification-dropdown">
+                            <div class="notification-dropdown-header">
+                                <span class="font-bold text-sm">Notifications</span>
+                                <button type="button" class="btn-mark-all-read" id="btn-mobile-mark-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list" id="mobile-notification-list">
+                                <div class="notification-empty text-muted">No new notifications</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================================================
+                     4. SECTION: DASHBOARD (REAL DYNAMIC DATA ONLY)
+                     ========================================================================== -->
+                <section id="section-dashboard" class="content-section">
+                    <!-- Top Greeting Header & Quick Actions -->
+                    <div class="dashboard-top-header">
+                        <div>
+                            <h1 class="welcome-heading" id="dashboard-welcome">Welcome back, Student!</h1>
+                            <p class="welcome-subtext">Manage your campus freelance activity, applications, and student peer services.</p>
+                        </div>
+                        <div class="dashboard-quick-actions">
+                            <button type="button" class="btn btn-outline btn-sm" id="dashboard-refresh" title="Refresh dashboard data" aria-label="Refresh dashboard data">↻ Refresh</button>
+                            <button type="button" class="btn btn-purple btn-sm" id="dash-btn-post-offer">+ Post Service Offer</button>
+                            <button type="button" class="btn btn-outline btn-sm" id="dash-btn-post-request">+ Post Service Request</button>
+                        </div>
+                    </div>
+
+                    <!-- Pure Dynamic Statistical Analytics Container (Rendered by dashboard-view.js) -->
+                    <div id="dashboard-analytics-content">
+                        <div class="text-center text-muted" style="padding: 3rem 0;">
+                            <div class="loader" style="margin: 0 auto 1rem;"></div>
+                            <p>Calculating your freelance statistics...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================================================
+                     5. SECTION: FIND SERVICES (SCREEN 7 REPLICA)
+                     ========================================================================== -->
+                <section id="section-services" class="content-section hidden">
+                    <div class="services-header-wrapper mb-4">
+                        <div class="services-header-top">
+                            <div class="services-header-info">
+                                <h1 class="page-title">Services Marketplace</h1>
+                                <p class="text-muted text-sm mt-1" id="services-header-subtitle">Standing campus services, printing, and equipment provided by fellow students (3D printing, laser cutting, ink printing, repair).</p>
+                            </div>
+                            <div class="services-header-actions">
+                                <button type="button" id="btn-post-offer" class="btn btn-purple">
+                                    + Post a Service Offer
+                                </button>
+                                <button type="button" id="btn-post-request" class="btn btn-purple hidden" hidden style="display: none !important;">
+                                    + Post a Service Request
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Combined Search & Filter Bar (Matching media_1790608311299.png) -->
+                    <div class="marketplace-search-combined-wrap mb-4">
+                        <div class="marketplace-search-combined-bar">
+                            <!-- Left: Search input section -->
+                            <div class="search-input-section">
+                                <svg class="search-bar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                <input type="text" id="marketplace-search-primary" class="marketplace-search-input" placeholder="Search posts">
+                                <button type="button" id="btn-search-clear" class="marketplace-search-clear hidden" title="Clear search" aria-label="Clear search">✕</button>
+                            </div>
+
+                            <!-- Subtle Vertical Divider -->
+                            <div class="search-bar-divider" aria-hidden="true"></div>
+
+                            <!-- Right: Filter section -->
+                            <div class="search-filter-section">
+                                <button type="button" id="btn-toggle-filters" class="btn-combined-filter" aria-expanded="false" title="Toggle Filters" aria-label="Toggle filters">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                    </svg>
+                                    <span class="filter-btn-text">Filters</span>
+                                    <span id="filter-active-count" class="filter-count-badge hidden">(0)</span>
+                                </button>
+                                <button type="button" id="btn-reset-filters" class="btn-combined-reset" title="Reset all filters" aria-label="Reset all filters">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                        <path d="M3 3v5h5"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Collapsible Filter Drawer right below the combined bar -->
+                        <div id="marketplace-filter-drawer" class="marketplace-filter-drawer hidden">
+                            <div class="filter-drawer-grid">
+                                <div class="form-group mb-0">
+                                    <label class="form-label" for="filter-category">Category or Skill</label>
+                                    <input list="filter-category-options" id="filter-category" class="form-control" placeholder="All Categories & Skills">
+                                    <datalist id="filter-category-options">
+                                        <option value="3D Design">3D Design</option>
+                                        <option value="AI & Data">AI & Data</option>
+                                        <option value="Altium Designer">Altium Designer</option>
+                                        <option value="App Development">App Development</option>
+                                        <option value="Arduino IDE">Arduino IDE</option>
+                                        <option value="AutoCAD">AutoCAD</option>
+                                        <option value="Backend Development">Backend Development</option>
+                                        <option value="Blender">Blender</option>
+                                        <option value="C">C</option>
+                                        <option value="C#">C#</option>
+                                        <option value="C++">C++</option>
+                                        <option value="CAD & 3D Modeling">CAD & 3D Modeling</option>
+                                        <option value="Calculus">Calculus</option>
+                                        <option value="Canva">Canva</option>
+                                        <option value="Chemistry">Chemistry</option>
+                                        <option value="CSS">CSS</option>
+                                        <option value="Data Analysis">Data Analysis</option>
+                                        <option value="Docker">Docker</option>
+                                        <option value="Electronics & Circuit Design">Electronics & Circuit Design</option>
+                                        <option value="Embedded Systems">Embedded Systems</option>
+                                        <option value="Figma">Figma</option>
+                                        <option value="Flutter">Flutter</option>
+                                        <option value="Frontend Development">Frontend Development</option>
+                                        <option value="Full Stack Development">Full Stack Development</option>
+                                        <option value="Fusion 360">Fusion 360</option>
+                                        <option value="Git">Git</option>
+                                        <option value="Go">Go</option>
+                                        <option value="Graphic Design">Graphic Design</option>
+                                        <option value="History">History</option>
+                                        <option value="HTML">HTML</option>
+                                        <option value="IoT">IoT</option>
+                                        <option value="Java">Java</option>
+                                        <option value="JavaScript">JavaScript</option>
+                                        <option value="KiCad">KiCad</option>
+                                        <option value="Logic">Logic</option>
+                                        <option value="Microsoft Excel">Microsoft Excel</option>
+                                        <option value="Microsoft PowerPoint">Microsoft PowerPoint</option>
+                                        <option value="Multisim">Multisim</option>
+                                        <option value="Node.js">Node.js</option>
+                                        <option value="PCB & Hardware Design">PCB & Hardware Design</option>
+                                        <option value="Photoshop">Photoshop</option>
+                                        <option value="PHP">PHP</option>
+                                        <option value="Programming">Programming</option>
+                                        <option value="Proteus">Proteus</option>
+                                        <option value="Python">Python</option>
+                                        <option value="Quality Assurance">Quality Assurance</option>
+                                        <option value="Raspberry Pi">Raspberry Pi</option>
+                                        <option value="React">React</option>
+                                        <option value="React Native">React Native</option>
+                                        <option value="Rust">Rust</option>
+                                        <option value="Software Development">Software Development</option>
+                                        <option value="Soldering & Prototyping">Soldering & Prototyping</option>
+                                        <option value="SolidWorks">SolidWorks</option>
+                                        <option value="SQL">SQL</option>
+                                        <option value="Technical Documentation">Technical Documentation</option>
+                                        <option value="Terminal">Terminal</option>
+                                        <option value="TypeScript">TypeScript</option>
+                                        <option value="UI/UX Design">UI/UX Design</option>
+                                        <option value="Webpage Development">Webpage Development</option>
+                                        <option value="Other">Other</option>
+                                    </datalist>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <label class="form-label" for="filter-sort">Sort By</label>
+                                    <select id="filter-sort" class="form-control">
+                                        <option value="newest">Newest First</option>
+                                        <option value="oldest">Oldest First</option>
+                                        <option value="budget-high">Budget: High to Low</option>
+                                        <option value="budget-low">Budget: Low to High</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <label class="form-label" for="filter-budget">Max Budget</label>
+                                    <div style="position: relative;">
+                                        <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(--text-muted);">₱</span>
+                                        <input type="number" id="filter-budget" class="form-control" placeholder="No limit" min="0" style="padding-left: 28px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="requests-count" class="text-sm text-muted mb-3"></div>
+                    <div class="requests-grid" id="requests-grid">
+                        <div class="loader"></div>
+                    </div>
+                </section>
+
+                <!-- ==========================================================================
+                     5b. SECTION: MENTORING HUB
+                     ========================================================================== -->
+                <section id="section-mentoring" class="content-section hidden">
+                    <div class="page-header mb-4">
+                        <h1 class="page-title">Mentoring Hub</h1>
+                        <p class="text-muted text-sm mt-1">Connect with verified student mentors, get project guidance, and build technical skills.</p>
+                    </div>
+
+                    <!-- Callout: Want to be a mentor? Apply in Profile -->
+                    <div class="mentoring-mentor-callout mb-4" id="mentoring-mentor-callout">
+                        <div class="mentoring-callout-inner">
+                            <div class="mentoring-callout-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="mentoring-callout-text">
+                                <span class="mentoring-callout-heading" id="mentoring-callout-title">Want to be a mentor?</span>
+                                <span class="mentoring-callout-sub" id="mentoring-callout-subtitle">Apply to become one in your <button type="button" class="mentoring-callout-link" id="btn-callout-goto-profile">Profile</button> by enabling peer mentoring to guide campus peers.</span>
+                            </div>
+                            <button type="button" class="btn btn-purple btn-sm mentoring-callout-cta" id="btn-mentoring-apply-mentor">
+                                <span id="mentoring-cta-label">Apply in Profile</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Combined Search & Filter Bar for Mentoring -->
+                    <div class="marketplace-search-combined-wrap mb-4">
+                        <div class="marketplace-search-combined-bar">
+                            <!-- Left: Search input section -->
+                            <div class="search-input-section">
+                                <svg class="search-bar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                <input type="text" id="mentoring-search-input" class="marketplace-search-input" placeholder="Search mentors by name, role, or skill">
+                                <button type="button" id="btn-mentoring-search-clear" class="marketplace-search-clear hidden" title="Clear search" aria-label="Clear mentoring search">✕</button>
+                            </div>
+
+                            <!-- Subtle Vertical Divider -->
+                            <div class="search-bar-divider" aria-hidden="true"></div>
+
+                            <!-- Right: Filter section -->
+                            <div class="search-filter-section">
+                                <button type="button" id="btn-toggle-mentoring-filters" class="btn-combined-filter" aria-expanded="false" title="Toggle Filters" aria-label="Toggle mentoring filters">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                    </svg>
+                                    <span class="filter-btn-text">Filters</span>
+                                    <span id="mentoring-filter-active-count" class="filter-count-badge hidden">(0)</span>
+                                </button>
+                                <button type="button" id="btn-reset-mentoring-filters" class="btn-combined-reset" title="Reset all filters" aria-label="Reset mentoring filters">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                        <path d="M3 3v5h5"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Mentoring Filter Drawer -->
+                        <div id="mentoring-filter-drawer" class="marketplace-filter-drawer hidden">
+                            <div class="filter-drawer-grid">
+                                <div class="form-group mb-0">
+                                    <label class="form-label" for="filter-mentor-skill">Skill or Discipline</label>
+                                    <input list="mentoring-skill-options" id="filter-mentor-skill" class="form-control" placeholder="All Skills (e.g. JavaScript, Python, CAD...)">
+                                    <datalist id="mentoring-skill-options">
+                                        <option value="3D Design">3D Design</option>
+                                        <option value="AI & Data">AI & Data</option>
+                                        <option value="Arduino IDE">Arduino IDE</option>
+                                        <option value="C++">C++</option>
+                                        <option value="CAD & 3D Modeling">CAD & 3D Modeling</option>
+                                        <option value="Electronics & Circuit Design">Electronics & Circuit Design</option>
+                                        <option value="Embedded Systems">Embedded Systems</option>
+                                        <option value="Frontend Development">Frontend Development</option>
+                                        <option value="Git">Git</option>
+                                        <option value="Graphic Design">Graphic Design</option>
+                                        <option value="JavaScript">JavaScript</option>
+                                        <option value="Node.js">Node.js</option>
+                                        <option value="PCB & Hardware Design">PCB & Hardware Design</option>
+                                        <option value="Python">Python</option>
+                                        <option value="Quality Assurance">Quality Assurance</option>
+                                        <option value="React">React</option>
+                                        <option value="Software Development">Software Development</option>
+                                        <option value="UI/UX Design">UI/UX Design</option>
+                                    </datalist>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <label class="form-label" for="filter-mentor-rating">Rating Status</label>
+                                    <select id="filter-mentor-rating" class="form-control">
+                                        <option value="all">All Mentors</option>
+                                        <option value="5">5.0 Star Rated</option>
+                                        <option value="4">4.0+ Stars</option>
+                                        <option value="new">New Mentors</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <label class="form-label" for="filter-mentor-sort">Sort Mentors</label>
+                                    <select id="filter-mentor-sort" class="form-control">
+                                        <option value="default">Default Order</option>
+                                        <option value="rating-high">Highest Rating First</option>
+                                        <option value="name-asc">Name (A to Z)</option>
+                                        <option value="name-desc">Name (Z to A)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mentoring-count" class="text-sm text-muted mb-3"></div>
+                    <div class="requests-grid" id="mentoring-users-grid">
+                        <div class="loader"></div>
+                    </div>
+                </section>
+
+                <!-- ==========================================================================
+                     6. SECTION: APPLICATIONS HUB
+                     ========================================================================== -->
+                <section id="section-applications" class="content-section hidden">
+                    <div class="page-header mb-4">
+                        <h1 class="page-title">Applications Hub</h1>
+                        <p class="text-muted text-sm mt-1">Manage incoming student candidate proposals, outgoing applications, and mentoring sessions.</p>
+
+                        <!-- Shared dashboard-style segmented navigation -->
+                        <div class="db-segment t-tabs mt-3" id="applications-marketplace-tabs" role="group" aria-label="Application category">
+                            <span class="t-tabs-pill" aria-hidden="true"></span>
+                            <button type="button" class="marketplace-tab-btn active" id="tab-app-posted" data-tab="posted" aria-pressed="true">
+                                <span>Posted Services</span>
+                                <span class="tab-count-pill" id="apps-posted-count">0</span>
+                            </button>
+                            <button type="button" class="marketplace-tab-btn" id="tab-app-mentoring" data-tab="mentoring" aria-pressed="false">
+                                <span>Mentoring Requests</span>
+                                <span class="tab-count-pill" id="apps-mentoring-count">0</span>
+                            </button>
+                            <button type="button" class="marketplace-tab-btn" id="tab-app-applied" data-tab="applied" aria-pressed="false">
+                                <span>My Orders & Applications</span>
+                                <span class="tab-count-pill" id="apps-applied-count">0</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="posted-jobs-list" class="apps-list">
+                        <div class="loader"></div>
+                    </div>
+
+                    <div id="mentoring-requests-list" class="apps-list hidden">
+                        <div class="loader"></div>
+                    </div>
+
+                    <div id="my-applications-list" class="apps-list hidden">
+                        <div class="loader"></div>
+                    </div>
+                </section>
+
+                <!-- ==========================================================================
+                     7. SECTION: MESSAGES
+                     ========================================================================== -->
+                <section id="section-messages" class="content-section hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Messages</h1>
+                        <p class="text-muted text-sm mt-1">Direct messaging and communication for service engagements, orders, and mentoring.</p>
+                    </div>
+
+                    <div id="messages-container" class="messages-layout">
+                        <!-- Conversations List (Left) -->
+                        <div class="conversations-sidebar">
+                            <div class="conv-header">
+                                <h3>Conversations</h3>
+                            </div>
+                            <div id="conversations-list" class="conversations-list">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Window (Right) -->
+                        <div id="chat-panel" class="chat-panel">
+                            <div class="chat-header">
+                                <button type="button" id="chat-back-btn"
+                                    class="btn btn-outline btn-sm mobile-only" aria-label="Back to conversations">←</button>
+                                <div id="chat-header-content" class="chat-header-content">
+                                    <span class="text-muted">Select a conversation to start chatting</span>
+                                </div>
+                            </div>
+
+                            <div id="chat-messages" class="chat-messages">
+                                <div class="empty-state">No conversation selected</div>
+                            </div>
+
+                            <!-- Attachment Preview Bar -->
+                            <div id="chat-attachment-preview" class="chat-attachment-preview hidden">
+                                <div class="attachment-chip">
+                                    <span class="attachment-chip-icon">📎</span>
+                                    <span id="attachment-name" class="attachment-chip-name truncate">model.stl</span>
+                                    <button type="button" id="btn-cancel-attachment" class="attachment-chip-remove" title="Remove attachment" aria-label="Remove attachment">✕</button>
+                                </div>
+                            </div>
+
+                            <div class="chat-input-row">
+                                <button type="button" id="chat-attach-btn" class="chat-attach-btn" title="Attach project file (STL, OBJ, PDF, ZIP, Images, Code)" aria-label="Attach project file">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                                    </svg>
+                                </button>
+                                <input type="file" id="chat-file-input" style="display: none;" accept="image/*,.stl,.obj,.step,.pdf,.zip,.rar,.txt,.c,.cpp,.py,.ino,.sch,.kicad_pcb,.dxf">
+                                <input type="text" id="chat-input" class="form-control" placeholder="Type a message...">
+                                <button type="button" id="chat-send-btn" class="btn btn-purple">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================================================
+                     8. SECTION: TRANSACTIONS (DYNAMIC DATA)
+                     ========================================================================== -->
+                <section id="section-transactions" class="content-section hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Records</h1>
+                        <p class="text-muted">Here are your earnings, completed jobs & peer payment records.</p>
+                    </div>
+
+                    <!-- 3 Transaction Stat Cards -->
+                    <div class="transaction-stats-grid mt-6">
+                        <div class="trans-stat-card">
+                            <span class="stat-card-label">Total Activity</span>
+                            <div class="stat-card-number" id="trans-total-earnings" style="color: #2563eb;">₱0</div>
+                        </div>
+                        <div class="trans-stat-card">
+                            <span class="stat-card-label">Pending</span>
+                            <div class="stat-card-number" id="trans-pending-earnings" style="color: #f59e0b;">₱0</div>
+                        </div>
+                        <div class="trans-stat-card">
+                            <span class="stat-card-label">Completed</span>
+                            <div class="stat-card-number" id="trans-completed-earnings" style="color: #10b981;">₱0</div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="db-segment t-tabs mt-6" id="transactions-status-tabs" role="group" aria-label="Record status">
+                        <span class="t-tabs-pill" aria-hidden="true"></span>
+                        <button type="button" class="tab-btn active trans-tab" data-filter="all" aria-pressed="true">All</button>
+                        <button type="button" class="tab-btn trans-tab" data-filter="pending" aria-pressed="false">Pending</button>
+                        <button type="button" class="tab-btn trans-tab" data-filter="completed" aria-pressed="false">Completed</button>
+                    </div>
+
+                    <!-- Transactions Data Table Card -->
+                    <div class="dash-card mt-4">
+                        <div class="transactions-table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Job</th>
+                                        <th>Submitted</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactions-tbody">
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted" style="padding: 2rem;">No payment or service records found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <!-- ==========================================================================
+                     7b. SECTION: ACTIVITY LOGS & AUDIT TRAIL
+                     ========================================================================== -->
+                <section id="section-logs" class="content-section hidden">
+                    <div class="logs-header-wrapper mb-4">
+                        <div class="logs-header-top">
+                            <div>
+                                <h1 class="page-title">Activity Logs & Audit Trail</h1>
+                                <p class="text-muted text-sm mt-1">Real-time audit history of marketplace listings, proposals, order completions, messages, and profile updates.</p>
+                            </div>
+                            <div class="logs-header-actions">
+                                <button type="button" id="btn-export-logs" class="btn btn-outline" title="Export logs as JSON" aria-label="Export audit log as JSON">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    <span>Export Audit Log</span>
+                                </button>
+                                <button type="button" id="btn-clear-logs" class="btn btn-outline-danger" title="Clear your local action logs" aria-label="Clear local action logs">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    <span>Clear Logs</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="logs-container">
+                        <!-- Rendered dynamically by renderLogsSection in src/logs-view.js -->
+                    </div>
+                </section>
+
+                <!-- ==========================================================================
+                     10. SECTION: PROFILE & PORTFOLIO
+                     ========================================================================== -->
+                <section id="section-profile" class="content-section hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Profile & Portfolio</h1>
+                        <p class="text-muted text-sm mt-1">Manage your student credentials, verified skills, and project showcase.</p>
+                    </div>
+
+                    <!-- transitions-dev Skeleton Loader and Reveal (14-skeleton-reveal.md) -->
+                    <div class="t-skel profile-skel" id="profile-skel" data-state="loading">
+                        <!-- Skeleton Layer (is-pulsing) -->
+                        <div class="t-skel-skeleton is-pulsing" id="profile-skel-skeleton" aria-hidden="true">
+                            <!-- Hero Profile Card Skeleton -->
+                            <div class="profile-hero skel-card" style="display: flex; flex-wrap: wrap; gap: 2rem; position: relative; align-items: center;">
+                                <div class="profile-avatar-wrapper" style="position: relative; flex-shrink: 0; width: 84px; height: 84px;">
+                                    <div class="skel-bone" style="width: 84px; height: 84px; border-radius: 50%;"></div>
+                                </div>
+                                <div class="profile-hero-info" style="flex: 1; min-width: 250px;">
+                                    <div class="profile-name-badges-row flex items-center gap-3 flex-wrap mb-2">
+                                        <div class="skel-bone" style="width: 210px; height: 26px; border-radius: 6px;"></div>
+                                        <div class="profile-badges-row flex items-center gap-2">
+                                            <div class="skel-bone" style="width: 110px; height: 22px; border-radius: 999px;"></div>
+                                            <div class="skel-bone" style="width: 80px; height: 22px; border-radius: 999px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skel-bone mb-2" style="width: 90px; height: 16px; border-radius: 4px;"></div>
+                                    <div class="skel-bone mb-1" style="width: 240px; height: 14px; border-radius: 4px;"></div>
+                                    <div class="skel-bone mb-2" style="width: 180px; height: 14px; border-radius: 4px;"></div>
+                                    <div class="profile-faculty-pill skel-bone mt-2" style="width: 200px; height: 16px; border-radius: 999px;"></div>
+                                </div>
+                                <div class="skel-bone" style="width: 120px; height: 38px; border-radius: 999px; align-self: flex-start;"></div>
+                            </div>
+
+                            <div class="profile-section-block mt-6">
+                                <!-- Middle Block: About & Skills Skeleton -->
+                                <div class="credentials-card mb-6 skel-card">
+                                    <div style="border-bottom: 1px solid var(--border-card); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+                                        <div class="skel-bone mb-3" style="width: 100px; height: 18px; border-radius: 4px;"></div>
+                                        <div class="skel-bone mb-2" style="width: 100%; height: 14px; border-radius: 4px;"></div>
+                                        <div class="skel-bone mb-2" style="width: 88%; height: 14px; border-radius: 4px;"></div>
+                                        <div class="skel-bone" style="width: 65%; height: 14px; border-radius: 4px;"></div>
+                                    </div>
+                                    <div>
+                                        <div class="skel-bone mb-3" style="width: 190px; height: 18px; border-radius: 4px;"></div>
+                                        <div class="flex flex-wrap gap-2">
+                                            <div class="skel-bone" style="width: 80px; height: 26px; border-radius: 999px;"></div>
+                                            <div class="skel-bone" style="width: 110px; height: 26px; border-radius: 999px;"></div>
+                                            <div class="skel-bone" style="width: 95px; height: 26px; border-radius: 999px;"></div>
+                                            <div class="skel-bone" style="width: 125px; height: 26px; border-radius: 999px;"></div>
+                                            <div class="skel-bone" style="width: 75px; height: 26px; border-radius: 999px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Projects & Portfolio Showcase Skeleton -->
+                                <div class="credentials-card mb-6 skel-card">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <div class="skel-bone mb-2" style="width: 240px; height: 18px; border-radius: 4px;"></div>
+                                            <div class="skel-bone" style="width: 320px; height: 12px; border-radius: 4px;"></div>
+                                        </div>
+                                        <div class="skel-bone" style="width: 110px; height: 34px; border-radius: 8px;"></div>
+                                    </div>
+                                    <div class="portfolio-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem;">
+                                        <!-- Project Skeleton Card 1 -->
+                                        <div class="portfolio-card skel-card" style="padding: 1rem 1.15rem;">
+                                            <div class="skel-bone mb-3" style="width: 100%; height: 180px; border-radius: 8px;"></div>
+                                            <div class="skel-bone mb-2" style="width: 70%; height: 18px; border-radius: 4px;"></div>
+                                            <div class="skel-bone mb-2" style="width: 95%; height: 12px; border-radius: 4px;"></div>
+                                            <div class="skel-bone mb-3" style="width: 60%; height: 12px; border-radius: 4px;"></div>
+                                            <div class="skel-bone" style="width: 40%; height: 14px; border-radius: 4px;"></div>
+                                        </div>
+                                        <!-- Project Skeleton Card 2 -->
+                                        <div class="portfolio-card skel-card" style="padding: 1rem 1.15rem;">
+                                            <div class="skel-bone mb-3" style="width: 100%; height: 180px; border-radius: 8px;"></div>
+                                            <div class="skel-bone mb-2" style="width: 65%; height: 18px; border-radius: 4px;"></div>
+                                            <div class="skel-bone mb-2" style="width: 90%; height: 12px; border-radius: 4px;"></div>
+                                            <div class="skel-bone mb-3" style="width: 50%; height: 12px; border-radius: 4px;"></div>
+                                            <div class="skel-bone" style="width: 35%; height: 14px; border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ratings & Statistics Skeleton (2 Cards) -->
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                                    <!-- Ratings Breakdown Skeleton -->
+                                    <div class="credentials-card skel-card" style="margin-bottom: 0;">
+                                        <div class="skel-bone mb-3" style="width: 80px; height: 18px; border-radius: 4px;"></div>
+                                        <div style="display: flex; align-items: center; gap: 1.5rem;">
+                                            <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                                                <div class="skel-bone mb-2" style="width: 70px; height: 48px; border-radius: 8px;"></div>
+                                                <div class="skel-bone mb-1" style="width: 80px; height: 16px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 40px; height: 12px; border-radius: 4px;"></div>
+                                            </div>
+                                            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.6rem;">
+                                                <div class="skel-bone" style="width: 100%; height: 10px; border-radius: 10px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 10px; border-radius: 10px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 10px; border-radius: 10px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 10px; border-radius: 10px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 10px; border-radius: 10px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Platform Stats Skeleton -->
+                                    <div class="credentials-card skel-card" style="margin-bottom: 0;">
+                                        <div class="skel-bone mb-3" style="width: 160px; height: 18px; border-radius: 4px;"></div>
+                                        <div style="display: flex; gap: 2.5rem; flex-wrap: wrap;">
+                                            <div style="flex: 1; min-width: 120px; display: flex; flex-direction: column; gap: 0.8rem;">
+                                                <div class="skel-bone" style="width: 90px; height: 14px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 18px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 18px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 18px; border-radius: 4px;"></div>
+                                            </div>
+                                            <div style="flex: 1; min-width: 120px; display: flex; flex-direction: column; gap: 0.8rem;">
+                                                <div class="skel-bone" style="width: 90px; height: 14px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 18px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 18px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 100%; height: 18px; border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Reviews Skeleton -->
+                                <div class="credentials-card skel-card">
+                                    <div class="skel-bone mb-3" style="width: 80px; height: 18px; border-radius: 4px;"></div>
+                                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                        <div style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-light);">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <div class="skel-bone" style="width: 140px; height: 16px; border-radius: 4px;"></div>
+                                                <div class="skel-bone" style="width: 80px; height: 16px; border-radius: 4px;"></div>
+                                            </div>
+                                            <div class="skel-bone" style="width: 90%; height: 14px; border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real Content Layer -->
+                        <div class="t-skel-content" id="profile-skel-content">
+                            <!-- Hero Profile Card -->
+                            <div class="profile-hero" style="display: flex; flex-wrap: wrap; gap: 2rem; position: relative; align-items: center;">
+                                <div class="profile-avatar-wrapper" style="position: relative; flex-shrink: 0; width: 84px; height: 84px;">
+                                    <div class="profile-avatar-circle" id="profile-avatar" title="Click to change profile picture">JD</div>
+                                    <button type="button" id="btn-change-avatar" class="avatar-camera-badge" title="Change Profile Picture" aria-label="Change Profile Picture">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                            <circle cx="12" cy="13" r="4"></circle>
+                                        </svg>
+                                    </button>
+                                    <input type="file" id="profile-avatar-file-input" accept="image/jpeg,image/png,image/webp,image/gif" class="hidden">
+                                </div>
+                                <div class="profile-hero-info" style="flex: 1; min-width: 250px;">
+                                    <div class="profile-name-badges-row flex items-center gap-3 flex-wrap mb-1">
+                                        <h2 class="profile-user-name" id="profile-name" style="margin: 0;">Juan Dela Cruz</h2>
+                                        <div class="profile-badges-row flex items-center gap-2">
+                                            <span class="badge badge-approved" id="profile-verification"> Verified Student</span>
+                                            <div class="profile-availability-pill" id="profile-availability-badge" style="margin: 0;">Available</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-sm font-bold text-muted mb-1" id="profile-student-id" style="color: var(--text-heading);">N/A</div>
+                                    <p class="profile-user-program text-muted" id="profile-program-sub" style="margin-bottom: 0.25rem;">BS Computer Engineering<br>Cagayan State University</p>
+                                    <p class="profile-faculty-pill text-xs text-muted mt-2">Faculty Reference: <strong id="profile-faculty">Not provided</strong></p>
+                                </div>
+                                <button type="button" id="btn-edit-profile" class="edit-profile-pill-btn" style="align-self: flex-start;">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="8.5" cy="7" r="4"></circle>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                    Edit Profile
+                                </button>
+                            </div>
+
+                            <div class="profile-section-block mt-6">
+                                <!-- Middle Block: About & Skills -->
+                                <div class="credentials-card mb-6">
+                                    <!-- About Me -->
+                                    <div style="border-bottom: 1px solid var(--border-card); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+                                        <h3 class="profile-block-heading" style="margin-bottom: 0.75rem;">About Me</h3>
+                                        <p class="text-muted text-sm" id="profile-bio-display" style="line-height: 1.6; margin: 0;">No bio provided yet.</p>
+                                    </div>
+                                    <!-- Skills -->
+                                    <div>
+                                        <h3 class="profile-block-heading" style="margin-bottom: 0.75rem;">Skills, Languages & Software</h3>
+                                        <div class="flex flex-wrap gap-2" id="profile-skills-display">
+                                            <span class="text-muted text-sm">No skills listed.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Projects & Portfolio Showcase Block -->
+                                <div class="credentials-card mb-6" id="profile-portfolio-card">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <h3 class="profile-block-heading" style="margin: 0;">Projects & Portfolio Showcase</h3>
+                                            <p class="text-xs text-muted mt-1">Showcase engineering prototypes, 3D prints, circuit boards, or software you built.</p>
+                                        </div>
+                                        <button type="button" class="btn btn-outline btn-sm" id="btn-add-portfolio-item">+ Add Project</button>
+                                    </div>
+                                    <div class="portfolio-grid" id="profile-portfolio-grid">
+                                        <div class="empty-state text-center text-muted" style="padding: 1.5rem; grid-column: 1/-1;">No projects added to your portfolio yet. Click "+ Add Project" to showcase your work!</div>
+                                    </div>
+                                </div>
+
+                                <!-- Block 3: Ratings Breakdown & Stats (Grid of 2 Cards) -->
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                                    <!-- Ratings Breakdown (Left Card) -->
+                                    <div class="credentials-card" style="margin-bottom: 0;">
+                                        <h3 class="profile-block-heading mb-3">Ratings</h3>
+                                        <div style="display: flex; align-items: center; gap: 1.5rem;">
+                                            <div style="text-align: center;">
+                                                <h2 class="font-bold" style="font-size: 3.5rem; line-height: 1; margin: 0; color: var(--color-rating);" id="ratings-avg-score">0.0</h2>
+                                                <div style="color: var(--color-rating); font-size: 1.25rem; letter-spacing: 2px; margin-top: 0.25rem;" id="ratings-avg-stars">★★★★★</div>
+                                                <div class="text-xs text-muted mt-1" id="ratings-total-count">0</div>
+                                            </div>
+                                            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.4rem;">
+                                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                                    <span style="width: 10px;">5</span>
+                                                    <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="pb-5" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                                    <span style="width: 10px;">4</span>
+                                                    <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="pb-4" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                                    <span style="width: 10px;">3</span>
+                                                    <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="pb-3" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                                    <span style="width: 10px;">2</span>
+                                                    <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="pb-2" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                                    <span style="width: 10px;">1</span>
+                                                    <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="pb-1" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Stats (Right Card) -->
+                                    <div class="credentials-card" style="margin-bottom: 0;">
+                                        <h3 class="profile-block-heading mb-3">Platform Statistics</h3>
+                                        <div style="display: flex; gap: 2.5rem; flex-wrap: wrap;">
+                                            <!-- Applicant Stats -->
+                                            <div style="flex: 1; min-width: 120px;">
+                                                <h4 class="font-bold text-xs text-muted mb-3 uppercase border-b pb-2" style="border-color: var(--border-light);">As Applicant</h4>
+                                                <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+                                                    <div style="color: var(--status-pending); display: flex; justify-content: space-between;"><span class="font-bold">Pending</span> <span class="font-bold" id="stat-app-pending">0</span></div>
+                                                    <div style="color: var(--status-completed); display: flex; justify-content: space-between;"><span class="font-bold">Completed</span> <span class="font-bold" id="stat-app-completed">0</span></div>
+                                                    <div style="color: var(--status-terminated); display: flex; justify-content: space-between;"><span class="font-bold">Terminated</span> <span class="font-bold" id="stat-app-terminated">0</span></div>
+                                                </div>
+                                            </div>
+                                            <!-- Employer Stats -->
+                                            <div style="flex: 1; min-width: 120px;">
+                                                <h4 class="font-bold text-xs text-muted mb-3 uppercase border-b pb-2" style="border-color: var(--border-light);">As Employer</h4>
+                                                <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+                                                    <div style="color: var(--status-pending); display: flex; justify-content: space-between;"><span class="font-bold">Pending</span> <span class="font-bold" id="stat-emp-pending">0</span></div>
+                                                    <div style="color: var(--status-completed); display: flex; justify-content: space-between;"><span class="font-bold">Completed</span> <span class="font-bold" id="stat-emp-completed">0</span></div>
+                                                    <div style="color: var(--status-terminated); display: flex; justify-content: space-between;"><span class="font-bold">Terminated</span> <span class="font-bold" id="stat-emp-terminated">0</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Block 4: Feedback List -->
+                                <div class="credentials-card">
+                                    <h3 class="profile-block-heading mb-3">Reviews</h3>
+                                    <div id="profile-feedback-list">
+                                        <p class="text-muted text-sm text-center">No reviews yet.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</section>
+
+                <!-- ==========================================================================
+                     11. SECTION: ADMINISTRATOR DASHBOARD
+                     ========================================================================== -->
+                <section id="section-admin" class="content-section hidden">
+                    <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h1 class="page-title">Administrator Dashboard</h1>
+                            <p class="text-muted">Comprehensive platform analytics, user directory, and verification management</p>
+                        </div>
+                        <div class="admin-period-control" style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-card); padding: 0.45rem 1rem; border-radius: 12px; border: 1px solid var(--border-light);">
+                            <span class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Measure:</span>
+                            <select id="admin-period-select" class="form-control" style="padding: 0.35rem 0.75rem; font-size: 0.85rem; font-weight: 600; border-radius: 8px; width: auto; background: var(--bg-main);">
+                                <option value="month" selected>This Month (October 2026)</option>
+                                <option value="all">All-Time Platform</option>
+                                <option value="prev">Last Month (September 2026)</option>
+                            </select>
+                            <span class="badge badge-normal" id="admin-period-badge" style="font-size: 11px; padding: 3px 9px;">Monthly</span>
+                        </div>
+                    </div>
+
+                    <!-- Platform-wide Metrics Counters (including Active & Online Users & Success Rate) -->
+                    <div class="admin-stats-grid mt-6">
+                        <div class="dash-stat-card admin-stat-card-registered">
+                            <span class="stat-card-label" id="admin-label-registered">Registered Students</span>
+                            <div class="stat-card-number" id="admin-stat-registered" style="color: #0e74f4;">0</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-online">
+                            <span class="stat-card-label"><span class="active-pulse-dot" style="background: #10b981;"></span> Online Users</span>
+                            <div class="stat-card-number" id="admin-stat-online-users" style="color: #10b981;">1</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-active-users">
+                            <span class="stat-card-label" id="admin-label-active-users">Monthly Active Users</span>
+                            <div class="stat-card-number" id="admin-stat-active-users" style="color: #1e40af;">0</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-pending">
+                            <span class="stat-card-label" id="admin-label-pending">Pending Verification</span>
+                            <div class="stat-card-number" id="admin-stat-pending" style="color: #f59e0b;">0</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-active-jobs">
+                            <span class="stat-card-label" id="admin-label-active-jobs">Active Jobs</span>
+                            <div class="stat-card-number" id="admin-stat-active-jobs" style="color: #0284c7;">0</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-completed-jobs">
+                            <span class="stat-card-label" id="admin-label-completed-jobs">Completed This Month</span>
+                            <div class="stat-card-number" id="admin-stat-completed-jobs" style="color: #10b981;">0</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-terminated-jobs">
+                            <span class="stat-card-label" id="admin-label-terminated-jobs">Terminated This Month</span>
+                            <div class="stat-card-number" id="admin-stat-terminated-jobs" style="color: #ef4444;">0</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-total-transactions">
+                            <span class="stat-card-label" id="admin-label-total-transactions">Monthly Volume</span>
+                            <div class="stat-card-number" id="admin-stat-total-transactions" style="color: #1d4ed8;">₱0</div>
+                        </div>
+                        <div class="dash-stat-card admin-stat-card-success-rate">
+                            <span class="stat-card-label" id="admin-label-success-rate">Monthly Success Rate</span>
+                            <div class="stat-card-number" id="admin-stat-success-rate" style="color: #10b981;">100%</div>
+                        </div>
+                    </div>
+
+                    <!-- Platform Statistical Graphs & Analytics Intelligence -->
+                    <div id="admin-analytics-section" class="admin-analytics-section"></div>
+
+                    <!-- Admin Management Tabs -->
+                    <div class="db-segment t-tabs mt-6" id="admin-management-tabs" role="group" aria-label="Admin category">
+                        <span class="t-tabs-pill" aria-hidden="true"></span>
+                        <button type="button" class="tab-btn active admin-tab-btn" id="tab-admin-pending" data-admintab="pending" aria-pressed="true">
+                            <span>Pending Verifications</span>
+                            <span class="tab-count-pill" id="admin-pending-tab-badge">0</span>
+                        </button>
+                        <button type="button" class="tab-btn admin-tab-btn" id="tab-admin-registered" data-admintab="users" aria-pressed="false">
+                            <span>All Registered Students</span>
+                        </button>
+                        <button type="button" class="tab-btn admin-tab-btn" id="tab-admin-applications" data-admintab="applications" aria-pressed="false">
+                            <span>All Applications & Bids</span>
+                        </button>
+                        <button type="button" class="tab-btn admin-tab-btn" id="tab-admin-live-requests" data-admintab="listings" aria-pressed="false">
+                            <span>Live Services & Mentoring</span>
+                            <span class="tab-count-pill" id="admin-listings-tab-badge">0</span>
+                        </button>
+                        <button type="button" class="tab-btn admin-tab-btn" id="tab-admin-audit-logs" data-admintab="audit-logs" aria-pressed="false">
+                            <span>Activity & Audit Logs</span>
+                            <span class="tab-count-pill" id="admin-logs-tab-badge">0</span>
+                        </button>
+                    </div>
+
+                    <!-- Search Filter for Admin -->
+                    <div class="admin-search-bar mt-4 mb-4">
+                        <input type="text" id="admin-search-input" class="form-control"
+                            placeholder="Search by name, student ID, email, faculty...">
+                    </div>
+
+                    <!-- Tab 1: Pending Verifications -->
+                    <div id="admin-tab-pending" class="admin-tab-content">
+                        <div class="transactions-table-wrapper dash-card">
+                            <table class="data-table" id="admin-pending-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="student" class="sortable-th">Student</th>
+                                        <th data-sort="studentId" class="sortable-th">Student ID</th>
+                                        <th data-sort="role" class="sortable-th">Role / Faculty</th>
+                                        <th data-sort="status" class="sortable-th">Status</th>
+                                        <th>Certificate</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-all-pending-tbody">
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            <div class="loader"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="admin-pending-pagination" class="admin-pagination-wrapper"></div>
+                        <div id="admin-list" class="hidden"></div>
+                    </div>
+
+                    <!-- Tab 2: All Users Directory -->
+                    <div id="admin-tab-users" class="admin-tab-content hidden">
+                        <div class="transactions-table-wrapper dash-card">
+                            <table class="data-table" id="admin-users-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="student" class="sortable-th">Student</th>
+                                        <th data-sort="studentId" class="sortable-th">Student ID</th>
+                                        <th data-sort="role" class="sortable-th">Role / Faculty</th>
+                                        <th data-sort="status" class="sortable-th">Status</th>
+                                        <th>Certificate</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-all-users-tbody">
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            <div class="loader"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="admin-users-pagination" class="admin-pagination-wrapper"></div>
+                    </div>
+
+                    <!-- Tab 3: All Applications -->
+                    <div id="admin-tab-applications" class="admin-tab-content hidden">
+                        <div class="transactions-table-wrapper dash-card">
+                            <table class="data-table" id="admin-apps-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="jobTitle" class="sortable-th">Job Title</th>
+                                        <th data-sort="applicant" class="sortable-th">Applicant</th>
+                                        <th data-sort="studentId" class="sortable-th">Student ID</th>
+                                        <th data-sort="offer" class="sortable-th">Offer</th>
+                                        <th data-sort="message" class="sortable-th">Message</th>
+                                        <th data-sort="status" class="sortable-th">Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-all-apps-tbody">
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            <div class="loader"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="admin-apps-pagination" class="admin-pagination-wrapper"></div>
+                    </div>
+
+                    <!-- Tab 5: Live Services & Mentoring Listings (Public Website) -->
+                    <div id="admin-tab-listings" class="admin-tab-content hidden">
+                        <div class="transactions-table-wrapper dash-card">
+                            <table class="data-table" id="admin-listings-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="title" class="sortable-th">Listing Title</th>
+                                        <th data-sort="type" class="sortable-th">Type</th>
+                                        <th data-sort="poster" class="sortable-th">Poster / Student</th>
+                                        <th data-sort="category" class="sortable-th">Category</th>
+                                        <th data-sort="budget" class="sortable-th">Budget / Rate</th>
+                                        <th data-sort="status" class="sortable-th">Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-all-listings-tbody">
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            <div class="loader"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="admin-listings-pagination" class="admin-pagination-wrapper"></div>
+                    </div>
+
+                    <!-- Tab 4: Platform Activity & System Audit Logs -->
+                    <div id="admin-tab-audit-logs" class="admin-tab-content hidden">
+                        <div class="dash-card mb-4" style="padding: 1.25rem;">
+                            <!-- Top Metrics Row -->
+                            <div class="audit-quick-stats-row mb-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.75rem;">
+                                <div class="audit-mini-stat" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light); border-radius: 10px; padding: 0.75rem 1rem;">
+                                    <div class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Total Actions</div>
+                                    <div id="admin-audit-stat-total" style="font-size: 1.35rem; font-weight: 800; color: var(--primary-purple); margin-top: 2px;">0</div>
+                                </div>
+                                <div class="audit-mini-stat" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light); border-radius: 10px; padding: 0.75rem 1rem;">
+                                    <div class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Users Logged</div>
+                                    <div id="admin-audit-stat-users" style="font-size: 1.35rem; font-weight: 800; color: #38bdf8; margin-top: 2px;">0</div>
+                                </div>
+                                <div class="audit-mini-stat" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light); border-radius: 10px; padding: 0.75rem 1rem;">
+                                    <div class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Listings & Bids</div>
+                                    <div id="admin-audit-stat-market" style="font-size: 1.35rem; font-weight: 800; color: #10b981; margin-top: 2px;">0</div>
+                                </div>
+                                <div class="audit-mini-stat" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light); border-radius: 10px; padding: 0.75rem 1rem;">
+                                    <div class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Auth & Sessions</div>
+                                    <div id="admin-audit-stat-auth" style="font-size: 1.35rem; font-weight: 800; color: #f59e0b; margin-top: 2px;">0</div>
+                                </div>
+                            </div>
+
+                            <!-- Filter Toolbar -->
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; flex: 1; min-width: 280px;">
+                                    <!-- Action Type Filter -->
+                                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                        <span class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Action:</span>
+                                        <select id="admin-audit-action-filter" class="form-control" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
+                                            <option value="all" selected>All Action Types</option>
+                                            <option value="post">Post (Offers & Requests)</option>
+                                            <option value="apply">Apply / Order</option>
+                                            <option value="get accepted">Approve / Get Accepted</option>
+                                            <option value="complete transaction">Complete Transaction</option>
+                                            <option value="terminate">Terminate Job</option>
+                                            <option value="rate">Rate & Review</option>
+                                            <option value="message">Messages</option>
+                                            <option value="log in">Log In</option>
+                                            <option value="log out">Log Out</option>
+                                            <option value="delete">Delete / Withdraw</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- User Filter -->
+                                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                        <span class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">User:</span>
+                                        <select id="admin-audit-user-filter" class="form-control" style="width: auto; max-width: 200px; padding: 0.35rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
+                                            <option value="all" selected>All Users</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Time Period Filter -->
+                                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                        <span class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Time:</span>
+                                        <select id="admin-audit-time-filter" class="form-control" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.82rem; border-radius: 8px;">
+                                            <option value="all" selected>All Time</option>
+                                            <option value="today">Today</option>
+                                            <option value="yesterday">Yesterday</option>
+                                            <option value="week">Past 7 Days</option>
+                                            <option value="month">This Month</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons: Export & Tools -->
+                                <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                                    <button type="button" id="admin-btn-export-audit-csv" class="btn btn-outline btn-sm" title="Export as CSV spreadsheet" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                        CSV
+                                    </button>
+                                    <button type="button" id="admin-btn-export-audit-json" class="btn btn-outline btn-sm" title="Export as JSON" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                        JSON
+                                    </button>
+                                    <button type="button" id="admin-btn-refresh-audit" class="btn btn-outline btn-sm" title="Refresh logs from database" style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                        Refresh
+                                    </button>
+                                    <button type="button" id="admin-btn-clear-audit" class="btn btn-outline btn-sm text-red" title="Clear all audit logs" style="border-color: rgba(239, 68, 68, 0.4); font-size: 0.8rem;">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Real-time Live Status Bar -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-muted);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span class="active-pulse-dot" style="background: #10b981; width: 7px; height: 7px; margin: 0;"></span>
+                                    <span>Real-time platform action tracking active</span>
+                                </div>
+                                <div id="admin-audit-log-stats-text">Showing 0 user activity records</div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table Container -->
+                        <div class="transactions-table-wrapper dash-card">
+                            <table class="data-table" id="admin-audit-logs-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="timestamp" class="sortable-th" style="min-width: 155px;">Date & Time</th>
+                                        <th data-sort="user" class="sortable-th" style="min-width: 190px;">User / Performed By</th>
+                                        <th data-sort="action" class="sortable-th" style="min-width: 130px;">Action Type</th>
+                                        <th data-sort="details" class="sortable-th" style="min-width: 250px;">Action Details</th>
+                                        <th data-sort="module" class="sortable-th" style="min-width: 120px;">Module / Scope</th>
+                                        <th data-sort="device" class="sortable-th" style="min-width: 130px;">Client Device</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-audit-logs-tbody">
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            <div class="loader"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="admin-audit-pagination" class="admin-pagination-wrapper"></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ==========================================================================
+         12. MODALS & DIALOGS
+         ========================================================================== -->
+
+    <!-- New Listing Modal (Service Offer vs Service Request) -->
+    <dialog id="dialog-new-request" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="new-listing-modal-title">Post a Service Offer</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <p class="text-muted text-sm mb-3" id="new-listing-modal-desc">Offer your equipment (3D printing, laser cutting, paper printing) or skills. Standing services stay active continuously for multiple orders.</p>
+            
+            <form id="new-request-form">
+                <input type="hidden" id="nr-listing-type" value="OFFER">
+                <div class="form-group">
+                    <label class="form-label" for="nr-title" id="nr-title-label">Service Title *</label>
+                    <input type="text" id="nr-title" class="form-control" placeholder="e.g. 3D Printing & Prototyping (FDM / Resin)" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="nr-description" id="nr-desc-label">Service Description *</label>
+                    <textarea id="nr-description" class="form-control" rows="4"
+                        placeholder="Describe the job, tasks, and expectations..." required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label class="form-label" for="nr-category">Category</label>
+                        <input list="nr-category-options" id="nr-category" class="form-control" required placeholder="Select Category / Skill">
+<datalist id="nr-category-options">
+                            <option value="3D Design">3D Design</option>
+                            <option value="AI & Data">AI & Data</option>
+                            <option value="Altium Designer">Altium Designer</option>
+                            <option value="App Development">App Development</option>
+                            <option value="Arduino IDE">Arduino IDE</option>
+                            <option value="AutoCAD">AutoCAD</option>
+                            <option value="Backend Development">Backend Development</option>
+                            <option value="Blender">Blender</option>
+                            <option value="C">C</option>
+                            <option value="C#">C#</option>
+                            <option value="C++">C++</option>
+                            <option value="CAD & 3D Modeling">CAD & 3D Modeling</option>
+                            <option value="Calculus">Calculus</option>
+                            <option value="Canva">Canva</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="CSS">CSS</option>
+                            <option value="Data Analysis">Data Analysis</option>
+                            <option value="Docker">Docker</option>
+                            <option value="Electronics & Circuit Design">Electronics & Circuit Design</option>
+                            <option value="Embedded Systems">Embedded Systems</option>
+                            <option value="Figma">Figma</option>
+                            <option value="Flutter">Flutter</option>
+                            <option value="Frontend Development">Frontend Development</option>
+                            <option value="Full Stack Development">Full Stack Development</option>
+                            <option value="Fusion 360">Fusion 360</option>
+                            <option value="Git">Git</option>
+                            <option value="Go">Go</option>
+                            <option value="Graphic Design">Graphic Design</option>
+                            <option value="History">History</option>
+                            <option value="HTML">HTML</option>
+                            <option value="IoT">IoT</option>
+                            <option value="Java">Java</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="KiCad">KiCad</option>
+                            <option value="Logic">Logic</option>
+                            <option value="Microsoft Excel">Microsoft Excel</option>
+                            <option value="Microsoft PowerPoint">Microsoft PowerPoint</option>
+                            <option value="Multisim">Multisim</option>
+                            <option value="Node.js">Node.js</option>
+                            <option value="PCB & Hardware Design">PCB & Hardware Design</option>
+                            <option value="Photoshop">Photoshop</option>
+                            <option value="PHP">PHP</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Proteus">Proteus</option>
+                            <option value="Python">Python</option>
+                            <option value="Quality Assurance">Quality Assurance</option>
+                            <option value="Raspberry Pi">Raspberry Pi</option>
+                            <option value="React">React</option>
+                            <option value="React Native">React Native</option>
+                            <option value="Rust">Rust</option>
+                            <option value="Software Development">Software Development</option>
+                            <option value="Soldering & Prototyping">Soldering & Prototyping</option>
+                            <option value="SolidWorks">SolidWorks</option>
+                            <option value="SQL">SQL</option>
+                            <option value="Technical Documentation">Technical Documentation</option>
+                            <option value="Terminal">Terminal</option>
+                            <option value="TypeScript">TypeScript</option>
+                            <option value="UI/UX Design">UI/UX Design</option>
+                            <option value="Webpage Development">Webpage Development</option>
+                            <option value="Other">Other</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group flex-1" id="nr-duration-group" style="display: none;">
+                        <label class="form-label" for="nr-duration">Time Duration (Max 4 hrs) *</label>
+                        <select id="nr-duration" class="form-control">
+                            <option value="30 mins">30 mins (0.5 hr)</option>
+                            <option value="1 hour">1 hour</option>
+                            <option value="1.5 hours">1.5 hours</option>
+                            <option value="2 hours" selected>2 hours</option>
+                            <option value="2.5 hours">2.5 hours</option>
+                            <option value="3 hours">3 hours</option>
+                            <option value="3.5 hours">3.5 hours</option>
+                            <option value="4 hours">4 hours (Maximum limit)</option>
+                        </select>
+                    </div>
+                    <div class="form-group flex-1" id="nr-standing-note-group">
+                        <label class="form-label">Service Nature</label>
+                        <div class="form-control" style="background: rgba(255,255,255,0.03); color: #4ade80; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
+                            Standing (Always Open)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label class="form-label" for="nr-budget" id="nr-budget-label">Starting Price / Base Rate (₱) *</label>
+                        <input type="number" id="nr-budget" class="form-control" placeholder="150" min="1" max="100000" required>
+                    </div>
+                    <div class="form-group flex-1" id="nr-deadline-group" style="display: none; position: relative;">
+                        <label class="form-label" for="nr-deadline-display" id="nr-deadline-label">Deadline (Date &amp; Hour) *</label>
+                        <div class="custom-dt-wrapper">
+                            <input type="text" id="nr-deadline-display" class="form-control custom-dt-input" placeholder="dd/mm/yyyy --:-- --" readonly autocomplete="off">
+                            <button type="button" id="nr-deadline-toggle-btn" class="custom-dt-icon-btn" aria-label="Choose deadline date and hour" tabindex="-1">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </button>
+                            <input type="hidden" id="nr-deadline" name="deadline">
+                        </div>
+
+                        <!-- Custom Date & Hour Popover with Damped Scroll Sensitivity -->
+                        <div class="custom-dt-popover hidden" id="custom-dt-popover" role="dialog" aria-modal="false" aria-label="Date and Hour Picker">
+                            <div class="custom-dt-body">
+                                <div class="custom-dt-calendar-panel">
+                                    <div class="custom-dt-cal-header">
+                                        <span class="custom-dt-month-label" id="custom-dt-month-label">October 2026</span>
+                                        <div class="custom-dt-nav-arrows">
+                                            <button type="button" class="custom-dt-nav-btn" id="custom-dt-prev-month" title="Previous Month" aria-label="Previous Month">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                            </button>
+                                            <button type="button" class="custom-dt-nav-btn" id="custom-dt-next-month" title="Next Month" aria-label="Next Month">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="custom-dt-weekdays">
+                                        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                                    </div>
+                                    <div class="custom-dt-days-grid" id="custom-dt-days-grid"></div>
+                                    <div class="custom-dt-cal-footer">
+                                        <button type="button" class="custom-dt-text-btn" id="custom-dt-btn-clear">Clear</button>
+                                        <button type="button" class="custom-dt-text-btn" id="custom-dt-btn-today">Today</button>
+                                    </div>
+                                </div>
+                                <div class="custom-dt-divider"></div>
+                                <div class="custom-dt-time-panel">
+                                    <div class="custom-dt-scroll-col-wrap">
+                                        <div class="custom-dt-scroll-col" id="custom-dt-hours-col" title="Scroll to select hour"></div>
+                                    </div>
+                                    <div class="custom-dt-scroll-col-wrap">
+                                        <div class="custom-dt-scroll-col" id="custom-dt-minutes-col" title="Scroll to select minute"></div>
+                                    </div>
+                                    <div class="custom-dt-ampm-col">
+                                        <button type="button" class="custom-dt-ampm-btn" id="custom-dt-ampm-am" data-ampm="am">am</button>
+                                        <button type="button" class="custom-dt-ampm-btn active" id="custom-dt-ampm-pm" data-ampm="pm">pm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optional Cover / Reference Image Upload with X remove button -->
+                <div class="form-group" id="nr-image-group">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="form-label mb-0" id="nr-image-label" for="nr-image-input">Cover / Sample Photo (Optional)</label>
+                        <span class="text-xs text-muted" id="nr-image-hint">PNG, JPG, WebP</span>
+                    </div>
+
+                    <!-- Dropzone state -->
+                    <div id="nr-image-dropzone" class="file-dropzone image-upload-dropzone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted" style="margin: 0 auto 0.5rem auto; display: block;">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p class="text-sm font-medium mb-1" id="nr-image-drop-title">Click or drag &amp; drop an image</p>
+                        <span class="text-xs text-muted" id="nr-image-drop-desc">Showcase your tools, finished work, or project diagram</span>
+                        <input type="file" id="nr-image-input" accept="image/*" style="opacity:0; position:absolute; z-index:-1; width:1px; height:1px;">
+                    </div>
+
+                    <!-- Image Preview state with X remove button -->
+                    <div id="nr-image-preview-container" class="image-upload-preview-wrapper hidden">
+                        <div class="image-preview-box">
+                            <img id="nr-image-preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Listing Image Preview" class="image-upload-preview-img">
+                            <button type="button" id="nr-image-remove-btn" class="image-preview-remove-btn" title="Remove image" aria-label="Remove image">
+                                ✕
+                            </button>
+                        </div>
+                        <div class="image-preview-actions">
+                            <span id="nr-image-filename" class="text-xs text-muted truncate">attached-image.jpg</span>
+                            <button type="button" id="nr-image-change-btn" class="btn btn-outline btn-xs">Change Photo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline dialog-close-btn">Cancel</button>
+                    <button type="submit" id="new-request-submit" class="btn btn-purple">Publish Service Offer</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+ 
+    <!-- Service / Offer Details Modal -->
+    <dialog id="dialog-service-details" class="modal">
+        <div class="modal-content" style="max-width: 680px; width: 95%;">
+            <div class="modal-header">
+                <div>
+                    <span id="sd-modal-type-badge" class="badge badge-normal mb-1">Service Offer</span>
+                    <h2 id="sd-modal-title" style="margin: 0; font-size: 1.35rem; line-height: 1.3;">Service Details</h2>
+                </div>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            
+            <div class="service-details-body" style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem;">
+                <!-- Cover Image Banner if available -->
+                <div id="sd-cover-banner" class="sd-cover-container hidden">
+                    <img id="sd-cover-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Service Cover Preview" class="sd-cover-image" />
+                </div>
+                <!-- Poster card -->
+                <div class="sd-poster-card flex items-center justify-between" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 0.85rem 1.15rem;">
+                    <div class="flex items-center gap-3">
+                        <div id="sd-poster-avatar" class="avatar avatar-md cursor-pointer">S</div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <strong id="sd-poster-name" class="cursor-pointer hover:underline" style="font-size: 1rem;">Student Name</strong>
+                                <span id="sd-poster-role-tag" class="text-xs text-muted">Service Provider</span>
+                            </div>
+                            <small id="sd-poster-faculty" class="text-muted text-xs" style="display: block;">Faculty Reference</small>
+                        </div>
+                    </div>
+                    <button type="button" id="sd-btn-view-profile" class="btn btn-outline btn-sm">View Profile</button>
+                </div>
+
+                <!-- Key Specs Grid -->
+                <div class="sd-specs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem;">
+                    <div class="sd-spec-item" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 0.75rem;">
+                        <small class="text-muted text-xs" id="sd-price-label">Starting Rate</small>
+                        <div id="sd-price-value" style="font-size: 1.25rem; font-weight: 800; color: var(--primary-purple); margin-top: 2px;">₱0</div>
+                    </div>
+                    <div class="sd-spec-item" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 0.75rem;">
+                        <small class="text-muted text-xs">Category</small>
+                        <div id="sd-category-value" style="font-size: 0.95rem; font-weight: 600; margin-top: 4px;">General</div>
+                    </div>
+                    <div class="sd-spec-item" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 0.75rem;">
+                        <small class="text-muted text-xs" id="sd-timeline-label">Availability / Timeline</small>
+                        <div id="sd-timeline-value" style="font-size: 0.92rem; font-weight: 600; margin-top: 4px; color: #4ade80;">Standing Service</div>
+                    </div>
+                </div>
+
+                <!-- Scope / Description -->
+                <div>
+                    <h4 style="font-size: 0.92rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em;">Full Scope & Description</h4>
+                    <div id="sd-description-content" style="background: rgba(0,0,0,0.25); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.92rem; line-height: 1.65; color: var(--text-main); white-space: pre-wrap; word-break: break-word; max-height: 320px; overflow-y: auto;">
+                        Description goes here...
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                <button type="button" class="btn btn-outline dialog-close-btn">Close</button>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <button type="button" id="sd-modal-edit-btn" class="btn btn-outline hidden">Edit</button>
+                    <button type="button" id="sd-modal-action-btn" class="btn btn-purple">Avail</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Apply / Avail Modal -->
+    <dialog id="dialog-apply" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="apply-modal-title">Submit Your Application</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <p class="text-muted mb-4" id="apply-job-title">Job Title</p>
+            <form id="apply-form">
+                <div class="form-group">
+                    <label class="form-label" for="apply-amount" id="apply-amount-label">Proposed Rate (₱) *</label>
+                    <input type="number" id="apply-amount" class="form-control" min="1" max="100000" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="apply-message" id="apply-message-label">Cover Message *</label>
+                    <textarea id="apply-message" class="form-control" rows="4"
+                        placeholder="Introduce yourself and explain why you're a good fit for this job..."
+                        required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline dialog-close-btn">Cancel</button>
+                    <button type="submit" id="apply-submit" class="btn btn-purple">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Edit Profile Modal -->
+    <dialog id="dialog-edit-profile" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <form id="edit-profile-form">
+                <!-- Profile Picture Upload Section -->
+                <div class="edit-profile-avatar-row mb-5" style="display: flex; align-items: center; gap: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-light);">
+                    <div class="edit-avatar-preview-wrapper" style="position: relative; width: 72px; height: 72px; flex-shrink: 0;">
+                        <div id="edit-avatar-preview" class="profile-avatar-circle" style="width: 72px; height: 72px; font-size: 1.5rem; overflow: hidden; margin: 0;">CJ</div>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <label class="form-label mb-1" style="font-weight: 700; margin-bottom: 2px;">Profile Picture</label>
+                        <p class="text-muted text-xs mb-3">Upload a custom profile photo (JPEG, PNG, or WebP).</p>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <button type="button" id="btn-upload-profile-photo" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                    <circle cx="12" cy="13" r="4"></circle>
+                                </svg>
+                                Change Picture
+                            </button>
+                            <button type="button" id="btn-remove-profile-photo" class="btn btn-outline btn-sm text-red" style="border-color: rgba(239, 68, 68, 0.35); display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                                Remove
+                            </button>
+                            <input type="file" id="edit-avatar-file-input" accept="image/jpeg,image/png,image/webp,image/gif" class="hidden">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="edit-bio">About Me</label>
+                    <textarea id="edit-bio" class="form-control" rows="3"
+                        placeholder="I'm a passionate and detail-oriented student..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Skills, Languages & Software</label>
+                    <p class="text-muted" style="font-size: 0.8rem; margin-top: -0.25rem; margin-bottom: 0.5rem;">Select all that apply</p>
+                    <input type="text" id="edit-skills-search" class="form-control mb-4" placeholder="Search skills (e.g., Python, AutoCAD)...">
+                    <div class="skills-grid" id="edit-skills-grid">
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="3D Design"><span>3D Design</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="AI & Data"><span>AI & Data</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Altium Designer"><span>Altium Designer</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="App Development"><span>App Development</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Arduino IDE"><span>Arduino IDE</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="AutoCAD"><span>AutoCAD</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Backend Development"><span>Backend Development</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Blender"><span>Blender</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="C"><span>C</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="C#"><span>C#</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="C++"><span>C++</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="CAD & 3D Modeling"><span>CAD & 3D Modeling</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Calculus"><span>Calculus</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Canva"><span>Canva</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Chemistry"><span>Chemistry</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="CSS"><span>CSS</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Data Analysis"><span>Data Analysis</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Docker"><span>Docker</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Electronics & Circuit Design"><span>Electronics & Circuit Design</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Embedded Systems"><span>Embedded Systems</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Figma"><span>Figma</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Flutter"><span>Flutter</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Frontend Development"><span>Frontend Development</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Full Stack Development"><span>Full Stack Development</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Fusion 360"><span>Fusion 360</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Git"><span>Git</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Go"><span>Go</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Graphic Design"><span>Graphic Design</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="History"><span>History</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="HTML"><span>HTML</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="IoT"><span>IoT</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Java"><span>Java</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="JavaScript"><span>JavaScript</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="KiCad"><span>KiCad</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Logic"><span>Logic</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Microsoft Excel"><span>Microsoft Excel</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Microsoft PowerPoint"><span>Microsoft PowerPoint</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Multisim"><span>Multisim</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Node.js"><span>Node.js</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="PCB & Hardware Design"><span>PCB & Hardware Design</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Photoshop"><span>Photoshop</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="PHP"><span>PHP</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Programming"><span>Programming</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Proteus"><span>Proteus</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Python"><span>Python</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Quality Assurance"><span>Quality Assurance</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Raspberry Pi"><span>Raspberry Pi</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="React"><span>React</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="React Native"><span>React Native</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Rust"><span>Rust</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Software Development"><span>Software Development</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Soldering & Prototyping"><span>Soldering & Prototyping</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="SolidWorks"><span>SolidWorks</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="SQL"><span>SQL</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Technical Documentation"><span>Technical Documentation</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Terminal"><span>Terminal</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="TypeScript"><span>TypeScript</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="UI/UX Design"><span>UI/UX Design</span></label>
+                        <label class="skill-pill"><input type="checkbox" name="skills" value="Webpage Development"><span>Webpage Development</span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="edit-preferred-role">Campus Preference / Role</label>
+                    <select id="edit-preferred-role" class="form-control">
+                        <option value="Offer My Skills">Skill Seeker / Service Provider (Offer My Skills)</option>
+                        <option value="Need Technical Assistance">Client in Need / Need Help (Need Technical Assistance)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="edit-availability">Availability</label>
+                    <select id="edit-availability" class="form-control">
+                        <option value="Available">Available</option>
+                        <option value="Busy">Busy</option>
+                        <option value="Unavailable">Unavailable</option>
+                    </select>
+                </div>
+                <div class="form-group" style="padding: 0.85rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: var(--radius-sm); margin-top: 1rem;">
+                    <label class="flex items-center gap-2 cursor-pointer" style="margin-bottom: 0; font-weight: 600;">
+                        <input type="checkbox" id="edit-is-mentor" style="width: 18px; height: 18px; accent-color: var(--primary-purple);">
+                        <span>Show My Profile as Peer Mentor</span>
+                    </label>
+                    <p class="text-muted text-xs mb-0 mt-1" style="padding-left: 26px;">
+                        When enabled, other students can find your profile in the Mentoring tab to request 1-on-1 assistance. By default, this is disabled.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline dialog-close-btn">Cancel</button>
+                    <button type="submit" class="btn btn-purple">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Review Modal -->
+    <dialog id="dialog-review" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="review-modal-title">Complete Job & Payment</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <form id="review-form">
+                <!-- Payment Summary Step -->
+                <div id="review-payment-summary" style="background: var(--bg-main); border: 1px solid var(--border-card); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span class="text-xs text-muted" style="text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Service Payment Summary</span>
+                        <span class="badge badge-approved" id="review-payment-status">Payment Release</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 id="review-payment-job" style="font-size: 1.05rem; margin: 0; font-weight: 600;">Job Title</h3>
+                            <p id="review-payment-recipient" class="text-xs text-muted" style="margin: 3px 0 0 0;">Pay to: Peer Freelancer</p>
+                        </div>
+                        <div id="review-payment-amount" style="font-size: 1.5rem; font-weight: 700; color: var(--color-green);">₱0</div>
+                    </div>
+                    <p id="review-payment-note" class="text-xs text-muted mt-2" style="border-top: 1px dashed var(--border-card); padding-top: 0.5rem; margin-bottom: 0;">
+                        ✓ Completing this job confirms the deliverables were received and releases payment of <strong><span id="review-payment-confirm-amt">₱0</span></strong> to the applicant.
+                    </p>
+                </div>
+
+                <!-- Negotiated Price Input -->
+                <div class="form-group" id="review-price-input-group" style="background: rgba(96, 63, 242, 0.04); border: 1px solid rgba(96, 63, 242, 0.16); border-radius: 12px; padding: 0.95rem 1.15rem; margin-bottom: 1.25rem;">
+                    <label class="form-label" for="review-negotiated-price" style="display: flex; justify-content: space-between; align-items: center; font-weight: 600; margin-bottom: 0.35rem; color: var(--text-heading); font-size: 0.88rem;">
+                        <span>Agreed / Negotiated Price</span>
+                        <span class="badge" style="background: rgba(96, 63, 242, 0.12); color: rgb(96, 63, 242); font-weight: 600; font-size: 0.72rem;">Adjustable</span>
+                    </label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <span style="position: absolute; left: 14px; font-size: 1.15rem; font-weight: 700; color: var(--color-green); pointer-events: none;">₱</span>
+                        <input type="number" id="review-negotiated-price" class="form-control" min="0" step="1" placeholder="0" style="padding-left: 32px; font-size: 1.25rem; font-weight: 700; color: var(--color-green); background: white; border: 1px solid var(--border-card);" required>
+                    </div>
+                    <p class="text-xs text-muted mt-2 mb-0" id="review-price-help-text" style="line-height: 1.4;">
+                        Initial rate: <strong id="review-original-price">₱0</strong>. If a different amount was agreed upon during your chat, enter the final negotiated price here so transactions and earnings remain accurate.
+                    </p>
+                </div>
+
+                <div class="form-group text-center">
+                    <label class="form-label" id="review-stars-label">How was your experience working together?</label>
+                    <div class="star-rating" id="review-stars" role="radiogroup" aria-labelledby="review-stars-label">
+                        <button type="button" class="star star-btn filled" role="radio" aria-checked="false" aria-label="1 star" data-value="1" tabindex="0">★</button>
+                        <button type="button" class="star star-btn filled" role="radio" aria-checked="false" aria-label="2 stars" data-value="2" tabindex="-1">★</button>
+                        <button type="button" class="star star-btn filled" role="radio" aria-checked="false" aria-label="3 stars" data-value="3" tabindex="-1">★</button>
+                        <button type="button" class="star star-btn filled" role="radio" aria-checked="false" aria-label="4 stars" data-value="4" tabindex="-1">★</button>
+                        <button type="button" class="star star-btn filled" role="radio" aria-checked="true" aria-label="5 stars" data-value="5" tabindex="0">★</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="review-comment">Write your feedback (optional)</label>
+                    <textarea id="review-comment" class="form-control" rows="3"
+                        placeholder="Share your experience working with this peer..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline dialog-close-btn">Cancel</button>
+                    <button type="submit" class="btn btn-purple" id="review-submit-btn">Confirm Payment & Complete</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Applicant Full Details Modal -->
+    <dialog id="dialog-applicant-details" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Applicant Full Information</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <div id="applicant-modal-body" class="space-y-3 mt-3">
+                <!-- Injected via JS -->
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <button type="button" class="btn btn-outline dialog-close-btn">Close</button>
+                <button type="button" id="btn-applicant-view-profile" class="btn btn-purple">View Profile</button>
+            </div>
+        </div>
+    </dialog>
+    <!-- Mentoring Request Details Modal -->
+    <dialog id="dialog-mentoring-details" class="modal">
+        <div class="modal-content" style="max-width: 560px; width: 95%;">
+            <div class="modal-header">
+                <h2>Mentoring Request Details</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <div id="mentoring-details-body" class="space-y-4 mt-3">
+                <!-- Injected via JS -->
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                <button type="button" class="btn btn-outline dialog-close-btn">Close</button>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" id="btn-mentoring-details-decline" class="btn btn-outline" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.35);">Decline</button>
+                    <button type="button" id="btn-mentoring-details-accept" class="btn btn-purple">Accept Mentoring</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <!-- Certificate Preview Modal -->
+    <dialog id="dialog-certificate" class="modal">
+        <div class="modal-content cert-modal-content text-center">
+            <div class="modal-header">
+                <h2>Certificate Preview</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">&times;</button>
+            </div>
+            <div class="cert-preview-wrapper">
+                <img id="cert-preview-img" class="cert-full-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Certificate Full Size">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline dialog-close-btn">Close</button>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="dialog-view-profile" class="modal">
+        <div class="modal-content" style="max-width: 800px; padding: 2.5rem; border-radius: 12px; position: relative;">
+            
+            <div class="modal-header border-b pb-4 mb-4" style="border-color: var(--border-light);">
+                <h2 style="font-size: 1.5rem;">User Profile</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">&times;</button>
+            </div>
+        <div id="vp-skeleton" class="hidden">
+            <div class="profile-hero mb-6" style="display: flex; flex-wrap: wrap; gap: 2rem; position: relative;">
+                <div class="skeleton-loader skeleton-avatar" style="width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;"></div>
+                <div class="profile-hero-info" style="flex:1; min-width: 250px;">
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <div class="skeleton-loader skeleton-title" style="width: 150px;"></div>
+                        <div class="skeleton-loader skeleton-badge" style="width: 70px;"></div>
+                    </div>
+                    <div class="skeleton-loader skeleton-line-short mt-2" style="width: 200px;"></div>
+                    <div class="skeleton-loader skeleton-badge mt-2" style="width: 80px;"></div>
+                    
+                    <div class="mt-4 pt-4 border-t" style="border-color: var(--border-light); display: flex; gap: 2rem; flex-wrap: wrap;">
+                        <div>
+                            <div class="skeleton-loader skeleton-line-xs" style="width: 100px; margin-bottom: 0.5rem;"></div>
+                            <div class="skeleton-loader skeleton-line-short" style="width: 120px;"></div>
+                        </div>
+                        <div>
+                            <div class="skeleton-loader skeleton-line-xs" style="width: 80px; margin-bottom: 0.5rem;"></div>
+                            <div class="skeleton-loader skeleton-line-short" style="width: 100px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="credentials-card" style="padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-card);">
+                <!-- About Me -->
+                <div class="mb-5 pb-5 " style="border-bottom: 1px solid var(--border-card);">
+                    <div class="skeleton-loader skeleton-line-short" style="width: 120px; margin-bottom: 1rem;"></div>
+                    <div class="skeleton-loader skeleton-line"></div>
+                    <div class="skeleton-loader skeleton-line" style="width: 80%;"></div>
+                </div>
+
+                <!-- Skills -->
+                <div class="mb-5 pb-5 " style="border-bottom: 1px solid var(--border-card);">
+                    <div class="skeleton-loader skeleton-line-short" style="width: 180px; margin-bottom: 1rem;"></div>
+                    <div class="flex gap-2">
+                        <div class="skeleton-loader skeleton-badge" style="width: 60px;"></div>
+                        <div class="skeleton-loader skeleton-badge" style="width: 80px;"></div>
+                        <div class="skeleton-loader skeleton-badge" style="width: 70px;"></div>
+                    </div>
+                </div>
+
+                <!-- Stats & Feedback Compact -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <div class="skeleton-loader skeleton-line-short" style="width: 150px; margin-bottom: 1rem;"></div>
+                        <div class="flex items-center gap-4">
+                            <div class="skeleton-loader skeleton-title" style="width: 60px; height: 40px; margin: 0;"></div>
+                            <div class="skeleton-loader skeleton-line-xs" style="width: 100px;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="skeleton-loader skeleton-line-short" style="width: 150px; margin-bottom: 1rem;"></div>
+                        <div class="flex gap-4">
+                            <div>
+                                <div class="skeleton-loader skeleton-line-xs" style="width: 80px; margin-bottom: 0.5rem;"></div>
+                                <div class="skeleton-loader skeleton-line-short" style="width: 80px; margin-bottom: 0.5rem;"></div>
+                                <div class="skeleton-loader skeleton-line-short" style="width: 80px; margin-bottom: 0.5rem;"></div>
+                                <div class="skeleton-loader skeleton-line-short" style="width: 80px;"></div>
+                            </div>
+                            <div>
+                                <div class="skeleton-loader skeleton-line-xs" style="width: 80px; margin-bottom: 0.5rem;"></div>
+                                <div class="skeleton-loader skeleton-line-short" style="width: 80px; margin-bottom: 0.5rem;"></div>
+                                <div class="skeleton-loader skeleton-line-short" style="width: 80px; margin-bottom: 0.5rem;"></div>
+                                <div class="skeleton-loader skeleton-line-short" style="width: 80px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div id="vp-body">
+            <div class="profile-hero mb-6" style="display: flex; flex-wrap: wrap; gap: 2rem; position: relative; align-items: center;">
+                <div class="profile-avatar-circle" id="vp-avatar" style="flex-shrink: 0;">JD</div>
+                <div class="profile-hero-info" style="flex: 1; min-width: 250px;">
+                    <div class="flex items-center gap-3 flex-wrap mb-1">
+                        <h2 class="profile-user-name" id="vp-name" style="margin: 0;">Name</h2>
+                        <span class="badge badge-approved" id="vp-verification">Verified</span>
+                        <div class="profile-availability-pill" id="vp-availability" style="margin: 0;">Available</div>
+                    </div>
+                    <div class="text-sm font-bold text-muted mb-1" id="vp-student-id" style="color: var(--text-heading);">N/A</div>
+                    <p class="profile-user-program text-muted" id="vp-program-sub" style="margin-bottom: 0.25rem;">BS Computer Engineering<br>Cagayan State University</p>
+                    <p class="text-xs text-muted mt-2">Faculty Reference: <strong id="vp-faculty">Not provided</strong></p>
+                </div>
+            </div>
+
+            <!-- Middle Block: About & Skills -->
+            <div class="credentials-card mb-6" style="padding: 1.5rem;">
+                <!-- About Me -->
+                <div class="mb-5 pb-5 " style="border-bottom: 1px solid var(--border-card);">
+                    <h3 class="profile-block-heading mb-2">About Me</h3>
+                    <p class="text-muted text-sm" id="vp-bio">No bio provided yet.</p>
+                </div>
+                <!-- Skills -->
+                <div>
+                    <h3 class="profile-block-heading mb-2">Skills, Languages & Software</h3>
+                    <div class="flex flex-wrap gap-2" id="vp-skills">
+                        <span class="text-muted text-sm">No skills listed.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects & Portfolio Showcase Block -->
+            <div class="credentials-card mb-6" style="padding: 1.5rem;" id="vp-portfolio-card">
+                <h3 class="profile-block-heading mb-2">Projects & Portfolio Showcase</h3>
+                <div class="portfolio-grid" id="vp-portfolio-grid">
+                    <span class="text-muted text-sm">No projects listed.</span>
+                </div>
+            </div>
+
+            <!-- Block 3: Ratings Breakdown & Stats (Grid of 2 Cards) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                <!-- Ratings Breakdown (Left Card) -->
+                <div class="credentials-card" style="margin-bottom: 0; padding: 1.5rem;">
+                    <h3 class="profile-block-heading mb-3">Ratings</h3>
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <div style="text-align: center;">
+                            <h2 class="font-bold" style="font-size: 3.5rem; line-height: 1; margin: 0; color: var(--color-rating);" id="vp-ratings-avg">0.0</h2>
+                            <div style="color: var(--color-rating); font-size: 1.25rem; letter-spacing: 2px; margin-top: 0.25rem;" id="vp-ratings-avg-stars">★★★★★</div>
+                            <div class="text-xs text-muted mt-1" id="vp-ratings-count">0</div>
+                        </div>
+                        <div style="flex: 1; display: flex; flex-direction: column; gap: 0.4rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                <span style="width: 10px;">5</span>
+                                <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="vp-pb-5" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                <span style="width: 10px;">4</span>
+                                <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="vp-pb-4" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                <span style="width: 10px;">3</span>
+                                <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="vp-pb-3" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                <span style="width: 10px;">2</span>
+                                <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="vp-pb-2" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: bold;">
+                                <span style="width: 10px;">1</span>
+                                <div style="flex: 1; background: #e8eaed; height: 10px; border-radius: 10px; overflow: hidden;"><div id="vp-pb-1" style="background: var(--color-rating); width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats (Right Card) -->
+                <div class="credentials-card" style="margin-bottom: 0; padding: 1.5rem;">
+                    <h3 class="profile-block-heading mb-3">Platform Statistics</h3>
+                    <div style="display: flex; gap: 2.5rem; flex-wrap: wrap;">
+                        <!-- Applicant Stats -->
+                        <div style="flex: 1; min-width: 120px;">
+                            <h4 class="font-bold text-xs text-muted mb-3 uppercase border-b pb-2" style="border-color: var(--border-light);">As Applicant</h4>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+                                <div style="color: var(--status-pending); display: flex; justify-content: space-between;"><span class="font-bold">Pending</span> <span class="font-bold" id="vp-app-pending">0</span></div>
+                                <div style="color: var(--status-completed); display: flex; justify-content: space-between;"><span class="font-bold">Completed</span> <span class="font-bold" id="vp-app-completed">0</span></div>
+                                <div style="color: var(--status-terminated); display: flex; justify-content: space-between;"><span class="font-bold">Terminated</span> <span class="font-bold" id="vp-app-terminated">0</span></div>
+                            </div>
+                        </div>
+                        <!-- Employer Stats -->
+                        <div style="flex: 1; min-width: 120px;">
+                            <h4 class="font-bold text-xs text-muted mb-3 uppercase border-b pb-2" style="border-color: var(--border-light);">As Employer</h4>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+                                <div style="color: var(--status-pending); display: flex; justify-content: space-between;"><span class="font-bold">Pending</span> <span class="font-bold" id="vp-emp-pending">0</span></div>
+                                <div style="color: var(--status-completed); display: flex; justify-content: space-between;"><span class="font-bold">Completed</span> <span class="font-bold" id="vp-emp-completed">0</span></div>
+                                <div style="color: var(--status-terminated); display: flex; justify-content: space-between;"><span class="font-bold">Terminated</span> <span class="font-bold" id="vp-emp-terminated">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 4: Feedback List -->
+            <div class="credentials-card" style="padding: 1.5rem;">
+                <h3 class="profile-block-heading mb-3">Reviews</h3>
+                <div id="vp-ratings-list" style="max-height: 250px; overflow-y: auto; padding-right: 0.5rem;">
+                    <p class="text-muted text-sm text-center">No reviews yet.</p>
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+                <button type="button" class="btn btn-outline dialog-close-btn" aria-label="Close profile dialog">Close</button>
+            </div>
+        </div>
+        </div>
+    </dialog>
+
+    <!-- ==========================================================================
+         13. TOAST NOTIFICATIONS & SCRIPTS
+         ========================================================================== -->
+    
+    <!-- Mentoring Apply Dialog -->
+    <dialog id="dialog-mentoring-apply" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Propose Mentoring Session</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">&times;</button>
+            </div>
+            <p class="text-sm text-muted mb-4">Send a request to <strong id="mentoring-target-name"></strong>.</p>
+            <form id="mentoring-apply-form">
+                <div class="form-group">
+                    <label>Session Title</label>
+                    <input type="text" id="mentoring-title" class="input" placeholder="e.g. Help with React concepts" required>
+                </div>
+                <div class="form-group">
+                    <label>What do you need help with?</label>
+                    <textarea id="mentoring-desc" class="input" rows="4" placeholder="Describe the topics you want to cover..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Expected Duration / Schedule</label>
+                    <input type="text" id="mentoring-time" class="input" placeholder="e.g. 1 hour, tomorrow afternoon" required>
+                </div>
+                <div class="form-group">
+                    <label>Proposed Price (₱)</label>
+                    <input type="number" id="mentoring-amount" class="input" min="0" max="100000" placeholder="e.g. 500" required>
+                </div>
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" class="btn btn-outline dialog-close-btn">Cancel</button>
+                    <button type="submit" id="btn-submit-mentoring" class="btn btn-purple">Submit Proposal</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Add Portfolio Item Dialog -->
+    <dialog id="dialog-add-portfolio" class="modal">
+        <div class="modal-content" style="max-width: 520px;">
+            <div class="modal-header">
+                <h2>Add Portfolio Project</h2>
+                <button type="button" class="dialog-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <form id="form-add-portfolio">
+                <div class="form-group">
+                    <label class="form-label" for="port-title">Project Title *</label>
+                    <input type="text" id="port-title" class="form-control" placeholder="e.g. 3D Printed Hexapod Robot / IoT Weather Station" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="port-desc">Project Description & Scope *</label>
+                    <textarea id="port-desc" class="form-control" rows="3" placeholder="Describe what you built, materials used, specs, or technical challenges solved..." required></textarea>
+                </div>
+                <!-- Project Photo Upload Section -->
+                <div class="form-group" id="port-image-group">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="form-label mb-0" for="port-image-input">Project Photo / Screenshot *</label>
+                        <span class="text-xs text-muted">PNG, JPG, WebP</span>
+                    </div>
+                    <div id="port-image-dropzone" class="file-dropzone image-upload-dropzone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted" style="margin: 0 auto 0.5rem auto; display: block;">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p class="text-sm font-medium mb-1" id="port-image-drop-title">Click or drag &amp; drop a project photo</p>
+                        <span class="text-xs text-muted" id="port-image-drop-desc">Showcase your prototype, 3D print, CAD diagram, or finished build</span>
+                        <input type="file" id="port-image-input" accept="image/*" style="opacity:0; position:absolute; z-index:-1; width:1px; height:1px;">
+                    </div>
+                    <div id="port-image-preview-container" class="image-upload-preview-wrapper hidden">
+                        <div class="image-preview-box">
+                            <img id="port-image-preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Project Preview" class="image-upload-preview-img">
+                            <button type="button" id="port-image-remove-btn" class="image-preview-remove-btn" title="Remove photo" aria-label="Remove photo">✕</button>
+                        </div>
+                        <div class="image-preview-actions">
+                            <span id="port-image-filename" class="text-xs text-muted truncate">attached-photo.jpg</span>
+                            <button type="button" id="port-image-change-btn" class="btn btn-outline btn-xs">Change Photo</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline dialog-close-btn">Cancel</button>
+                    <button type="submit" id="btn-save-portfolio" class="btn btn-purple">Add to Portfolio</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    
+    <div id="toast-container" class="toast-container"></div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
